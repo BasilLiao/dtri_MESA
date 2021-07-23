@@ -46,6 +46,7 @@ INSERT INTO system_permission(sp_id, sp_g_id, sp_type, sp_g_name, sp_permission,
 INSERT INTO system_permission(sp_id, sp_g_id, sp_type, sp_g_name, sp_permission, sys_sort, sp_name, sp_control)VALUES (15, 3,0, '產品製程', '0001001111', 1206, '通用-製令單-即時進度', 'production_schedule.basil');
 --工作站
 --遺棄--INSERT INTO system_permission(sp_id, sp_g_id, sp_type, sp_g_name, sp_permission, sys_sort, sp_name, sp_control)VALUES (17, 4,1, '工作站', '0001001101', 1301, '設定-料件SN類型', 'workstation_item.basil');
+
 INSERT INTO system_permission(sp_id, sp_g_id, sp_type, sp_g_name, sp_permission, sys_sort, sp_name, sp_control)VALUES (16, 4,1, '工作站', '0001001101', 1302, '設定-工作站-名稱設定', 'workstation_config.basil');
 INSERT INTO system_permission(sp_id, sp_g_id, sp_type, sp_g_name, sp_permission, sys_sort, sp_name, sp_control)VALUES (18, 4,1, '工作站', '0001001101', 1303, '設定-工作站-綁定-SN', 'workstation.basil');
 INSERT INTO system_permission(sp_id, sp_g_id, sp_type, sp_g_name, sp_permission, sys_sort, sp_name, sp_control)VALUES (19, 4,1, '工作站', '0001001101', 1304, '設定-工作站-流程管理', 'workstation_program.basil');
@@ -110,6 +111,7 @@ INSERT INTO system_user(su_id,su_account, su_e_name, su_email, su_name, su_passw
 SELECT setval('public.system_user_seq', 2, true);
 
 ----production_records
+
 INSERT INTO production_records(pr_id, pr_bom_id, pr_c_from,pr_c_name,pr_s_sn, pr_e_sn, pr_order_id, pr_p_model,pr_p_quantity,pr_p_ok_quantity,pr_b_item, pr_s_item) VALUES ('A44654-A654',  '91-363-G100001', '測試-生產注意事項','MAYA(Isreal)', 'no_sn0000n000','no_sn0000n000','測試-訂單編號(OP-2021042001)', 'DT363GL',3,0, '{"CPU":i600,"RAM":"4G"}','{"M/B 版本":"R5.6.P","ECN":"D6B"}');
 INSERT INTO production_records(pr_id, pr_bom_id, pr_c_from,pr_c_name,pr_s_sn, pr_e_sn, pr_order_id, pr_p_model,pr_p_quantity,pr_p_ok_quantity,pr_b_item, pr_s_item) VALUES ('A511-210204004',  '92-363-G100001', '測試-生產注意事項','MAYA(Isreal)', 'no_sn0000n000','no_sn0000n000','測試-訂單編號(OP-2021042002)', 'DT363GL',7,0, '{"CPU":i700,"RAM":"4G"}','{"M/B 版本":"R5.7.P","ECN":"D6B"}');
 INSERT INTO production_records(pr_id, pr_bom_id, pr_c_from,pr_c_name,pr_s_sn, pr_e_sn, pr_order_id, pr_p_model,pr_p_quantity,pr_p_ok_quantity,pr_b_item, pr_s_item) VALUES ('A513-123456799',  '93-363-G100001', '測試-生產注意事項','MAYA(Isreal)', 'A13W1CC140300','A13W1CC140306','測試-訂單編號(OP-2021042002)', 'DT363GL',7,0, '{"CPU":i800,"RAM":"4G"}','{"M/B 版本":"R5.8.P","ECN":"D6B"}');

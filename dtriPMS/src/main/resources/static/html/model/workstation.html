@@ -70,14 +70,24 @@
 						<td colspan="7" class="p-0 border border-dark">
 							<div class="row justify-content-between m-0">
 								<div class="row m-0 p-2">
+
+									<div>功能代碼[BC008]</div>
+
 									<div id="barcode_BC008" class="m-1"></div>
 									<div>功能代碼[BC008]</div>
 								</div>
 								<div class="row m-0 p-2">
+
+									<div>故障代碼[BC009]</div>
+
 									<div id="barcode_BC009" class="m-1"></div>
 									<div>故障代碼[BC009]</div>
 								</div>
 								<div class="row m-0 p-2">
+<<<<<<< HEAD
+=======
+									<div>資訊內容[BC010]</div>
+>>>>>>> branch 'main' of https://github.com/BasilLiao/dtri_MES.git
 									<div id="barcode_BC010" class="m-1"></div>
 									<div>資訊內容[BC010]</div>
 								</div>
@@ -173,7 +183,11 @@
 								<div class="col-12 m-0 p-0 h4">故障類別</div>
 								<div id="fix_t_example" class="p-1 col-3">
 									<div class="row m-0 p-1 bg-light">
+<<<<<<< HEAD
 										<div id="barcode_BC013" class="m-1 col-6"></div>
+=======
+										<div id="barcode_BC013" class="m-1 col-7"></div>
+>>>>>>> branch 'main' of https://github.com/BasilLiao/dtri_MES.git
 										<div id="BC013" class="barcode_action btn btn-light p-0 border-0 pt-1">XXX[BC013]</div>
 									</div>
 								</div>
@@ -184,7 +198,11 @@
 								</div>
 								<div id="fix_i_example" class="p-1 col-3">
 									<div class="row m-0 p-1 bg-light">
+<<<<<<< HEAD
 										<div id="barcode_BC014" class="m-1 col-6"></div>
+=======
+										<div id="barcode_BC014" class="m-1 col-7"></div>
+>>>>>>> branch 'main' of https://github.com/BasilLiao/dtri_MES.git
 										<div id="BC014" class="barcode_action btn btn-light p-0 border-0 pt-1">XXX[BC014]</div>
 									</div>
 								</div>
@@ -357,7 +375,11 @@
 						<!--(固定)目前條碼 -->
 						<td colspan="2" class="p-0">
 							<div class=" row p-1 m-0 border border-light rounded h2">
+<<<<<<< HEAD
 								<div class="col-3 p-1 m-0 b_code_w">輸入:</div>
+=======
+								<div class="col-3 p-1 m-0 b_code_w">指令:</div>
+>>>>>>> branch 'main' of https://github.com/BasilLiao/dtri_MES.git
 								<div class="col-9 p-0">
 									<input autocomplete="off" class="col p-1 rounded" id="m_order" type="text" required autofocus>
 								</div>
@@ -431,6 +453,7 @@
 								<div class=" bg-dark text-light m-0 p-1 h5">
 									<i class="bi bi-upc-scan mr-1"></i> Print Barcode (Auto)
 								</div>
+<<<<<<< HEAD
 								<div class=" shadow-sm text-left row m-0">
 									<div class="p-1 m-1 border border-dark" style="width: 240px;">
 										<div class="row m-0 pl-1 h5">
@@ -439,6 +462,25 @@
 											</div>
 											<div class="m-0 p-1">單SN條碼</div>
 
+=======
+								<div class=" shadow-sm text-left">
+									<div class=" bg-white rounded-top m-0 pl-1 h5 row">
+										<div class="ml-1">
+											<input id="sn_cumulative_check" name="" value="true" type="checkbox" class=" mt-2 p-1 border border-dark rounded big-checkbox">
+										</div>
+										<div class="m-0 p-1">包裝條碼累計</div>
+										<div class="col-2">
+											<input id="sn_cumulative_number" type="number" class="col m-1 p-0 rounded" value="0" style="min-width: 40px;">
+										</div>
+										<div class="m-0 p-1">(自動列印)</div>
+									</div>
+									<div id="sn_cumulative_example" class="d-none sn_cumulative row p-1 m-0 border border-light rounded font-weight-bold">
+										<div class="col-5 p-1 m-0 row">
+											<div>*Product SN:</div>
+										</div>
+										<div class="col-9 p-0">
+											<input disabled="disabled" type="text" required="required" class="sn_cumulative_value col p-1 border-0 border-primary rounded">
+>>>>>>> branch 'main' of https://github.com/BasilLiao/dtri_MES.git
 										</div>
 									</div>
 									<div class="p-1 m-1 border border-dark" style="width: 310px;">
@@ -617,6 +659,12 @@
 					fix_t_example[0].children[0].children[1].id=key_id;
 					fix_t_example[0].children[0].children[0].id='barcode_'+key_id;
 					fix_t_example[0].children[0].children[0].innerText="";
+
+					fix_t_example[0].children[0].children[0].innerText = '['+key_id+']'+key_name;
+					fix_t_example[0].children[0].children[0].id=key_id;
+					fix_t_example[0].children[0].children[1].id='barcode_'+key_id;
+					fix_t_example[0].children[0].children[1].innerText="";
+
 					fix_t_example.insertBefore("#fix_t_example");
 					//建立新code
 					this.create_barcode('barcode_'+key_id,key_id,"code39");
@@ -892,6 +940,7 @@
 							$("#fix_i_example").removeClass('d-none');
 							$(".fix_i_list").remove();
 							$("#fix-item").text( workstation.fix_type[code]['name']);
+							$("#fix-item").text(code);
 							
 							items = main.orderedSort(items);//排序
 							for(var a = 0;a<Object.keys(items).length;a++){
@@ -905,6 +954,11 @@
 								fix_t_example[0].children[0].children[1].id=key_id;
 								fix_t_example[0].children[0].children[0].id='barcode_'+key_id;
 								fix_t_example[0].children[0].children[0].innerText="";
+								fix_t_example[0].children[0].children[0].innerText = '['+key_id+']'+key_name;
+								fix_t_example[0].children[0].children[0].id=key_id;
+								fix_t_example[0].children[0].children[1].id='barcode_'+key_id;
+								fix_t_example[0].children[0].children[1].innerText="";
+
 								fix_t_example.insertBefore("#fix_i_example");
 								//建立新code
 								workstation.create_barcode('barcode_'+key_id,key_id,"code39");
