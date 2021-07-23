@@ -98,7 +98,6 @@ public class WorkstationWorkService {
 			if (fix_item.size() > 0) {
 				fix_type.put("name", mc_g_name);
 				fix_type.put("item", new JSONObject(fix_item));
-				fix_type.put("item",new JSONObject(fix_item));
 				fix_obj.put(mc_g_code, fix_type);
 				fix_item = new LinkedHashMap<String, String>();
 				fix_type = new JSONObject();
