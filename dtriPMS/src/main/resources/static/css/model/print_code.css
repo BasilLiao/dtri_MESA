@@ -14,27 +14,20 @@
 		width: 100px;
 	}
 	html {
-		width: 60mm;
-		height: 20mm;
-		transform-origin: 12% 38%;
-		transform: scale(1) rotate(90deg);
+		/*width: 60mm;
+		height: 20mm;*/
 		font-size: 18px;
-	}
-	body {
-		width: 60mm;
-		height: 20mm;
 	}
 }
 
 html {
-	width: 60mm;
-	height: 20mm;
-	transform-origin: 12% 38%;
-	transform: scale(1) rotate(90deg);
+	/*width: 60mm;
+	height: 20mm;*/
+	
 	font-size: 18px;
 }
 
-body {
-	width: 60mm;
-	height: 20mm;
+#barcode_sn_print{
+	transform-origin: 50% -25%;
+	transform: scale(2.1);
 }

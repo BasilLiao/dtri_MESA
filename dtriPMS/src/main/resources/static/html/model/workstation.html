@@ -382,7 +382,7 @@
 					<tr id="workstation_example" class="w_i_6 font-weight-bold">
 						<td colspan="2" class="p-0">
 							<div class=" row p-1 m-0 border border-light rounded">
-								<div class="col-5 p-0 row m-0 b_code_w">
+								<div class="col-3 p-0 row m-0 b_code_w">
 									<input class="ml-1 mt-2 p-1 border border-dark rounded big-checkbox w_sn_check" id="" name="" value="true" type="checkbox">
 									<div class=" m-0 p-1 w_sn_name">Loading...</div>
 								</div>
@@ -431,51 +431,52 @@
 								<div class=" bg-dark text-light m-0 p-1 h5">
 									<i class="bi bi-upc-scan mr-1"></i> Print Barcode (Auto)
 								</div>
-								<div class=" shadow-sm text-left row m-0">
-									<div class="p-1 m-1 border border-dark" style="width: 240px;">
-										<div class="row m-0 pl-1 h5">
-											<div class="ml-1">
-												<input id="sn_one_check" name="" value="true" type="checkbox" class=" mt-2 p-1 border border-dark rounded big-checkbox">
-											</div>
-											<div class="m-0 p-1">單SN條碼</div>
-										</div>
-									</div>
-									<div class="p-1 m-1 border border-dark" style="width: 310px;">
-										<div class=" bg-white rounded-top m-0 pl-1 h5 row">
-											<div class="ml-1">
-												<input id="sn_cumulative_check" name="" value="true" type="checkbox" class=" mt-2 p-1 border border-dark rounded big-checkbox">
-											</div>
-											<div class="m-0 p-1">包裝條碼累計</div>
-											<div class="col-2">
-												<input id="sn_cumulative_number" type="number" class="col m-1 p-0 rounded" value="0" style="min-width: 40px;">
-											</div>
-										</div>
-										<div id="sn_cumulative_example" class="d-none sn_cumulative row p-1 m-0 border border-light rounded font-weight-bold">
-											<div class="col-5 p-1 m-0 row">
-												<div>*Product SN:</div>
-											</div>
-											<div class="col-9 p-0">
-												<input disabled="disabled" type="text" required="required" class="sn_cumulative_value col p-1 border-0 border-primary rounded">
-											</div>
-										</div>
-									</div>
-
-								</div>
 								<div class="row m-0">
+									<!-- SN 單一標籤 -->
 									<div class="p-1 m-1 border border-dark" style="width: 240px;">
-										<div class="row m-0">
+										<div class="p-1 m-0">
+											<div class="row m-0 pl-1 h5">
+												<div class="col-2 m-0 p-0">
+													<input id="sn_one_check" name="" value="true" type="checkbox" class=" mt-1 border border-dark rounded big-checkbox">
+												</div>
+												<div class="col-10 m-0 p-0">SN條碼</div>
+											</div>
+										</div>
+										<div class="p-1 m-0 mb-2 row bg-light">
 											<div class="col-8 m-0 p-1">(Print quantity)</div>
 											<div class="col-4 m-0 p-1">
 												<input id="barcode_sn_one_nb" type="number" class="col p-0 rounded" value="1">
 											</div>
 										</div>
-										<div id="barcode_sn_print" class="m-0 p-1 border border-secondary" style="width: 225px;">
+										<div id="barcode_sn_print" class="m-0 p-1 pl-2 border border-white" style="width: 225px;height: 55px">
 											<div id="barcode_sn_one"></div>
 											<div id="barcode_sn_name" class="font-weight-bold text-center">S/N:</div>
 										</div>
 									</div>
+
+									<!-- 外包裝 -->
 									<div class="p-1 m-1 border border-dark" style="width: 310px;">
-										<div class="row m-0 ">
+										<div class="p-1 m-0">
+											<div class=" bg-white rounded-top m-0 p-1 h5 row">
+												<div class="col-2 m-0 p-0">
+													<input id="sn_cumulative_check" name="" value="true" type="checkbox" class=" mt-1 border border-dark rounded big-checkbox">
+												</div>
+												<div class="col-6 m-0 p-0">包裝條碼累計</div>
+												<div class="col-4 m-0 p-0">
+													<input id="sn_cumulative_number" type="number" class="col m-0 p-0 rounded" value="0" style="min-width: 40px;">
+												</div>
+											</div>
+											<div id="sn_cumulative_example" class=" sn_cumulative row p-1 m-0 border border-light rounded font-weight-bold">
+												<div class="col-3 p-1 m-0 row">
+													<div>*SN:</div>
+												</div>
+												<div class="col-9 p-0">
+													<input disabled="disabled" type="text" required="required" class="sn_cumulative_value col p-0 border-0 border-primary rounded">
+												</div>
+											</div>
+										</div>
+
+										<div class="p-1 m-0 mb-2 row bg-light">
 											<div class="col-8 m-0 p-1">(Print quantity)</div>
 											<div class="col-4 m-0 p-1">
 												<input id="barcode_sn_all_list_nb" type="number" class="col p-0 rounded" value="1">
@@ -534,24 +535,24 @@
 		created() {
 			console.log("workstation.html(created)");
 			//限制動作5碼
-			this.create_barcode("barcode_BC001","BC001","code39");
-			this.create_barcode("barcode_BC002","BC002","code39");
-			this.create_barcode("barcode_BC003","BC003","code39");
-			this.create_barcode("barcode_BC004","BC004","code39");
-			this.create_barcode("barcode_BC005","BC005","code39");
-			this.create_barcode("barcode_BC006","BC006","code39");
-			this.create_barcode("barcode_BC007","BC007","code39");
+			this.create_barcode("barcode_BC001","BC001","code39",22);
+			this.create_barcode("barcode_BC002","BC002","code39",22);
+			this.create_barcode("barcode_BC003","BC003","code39",22);
+			this.create_barcode("barcode_BC004","BC004","code39",22);
+			this.create_barcode("barcode_BC005","BC005","code39",22);
+			this.create_barcode("barcode_BC006","BC006","code39",22);
+			this.create_barcode("barcode_BC007","BC007","code39",22);
 			
 			//標籤開關
-			this.create_barcode("barcode_BC008","BC008","code39");
-			this.create_barcode("barcode_BC009","BC009","code39");
-			this.create_barcode("barcode_BC010","BC010","code39");
-			this.create_barcode("barcode_BC011","BC011","code39");
+			this.create_barcode("barcode_BC008","BC008","code39",22);
+			this.create_barcode("barcode_BC009","BC009","code39",22);
+			this.create_barcode("barcode_BC010","BC010","code39",22);
+			this.create_barcode("barcode_BC011","BC011","code39",22);
 			
 			//維修代號
-			this.create_barcode("barcode_BC012","BC012","code39");
-			this.create_barcode("barcode_BC013","BC013","code39");
-			this.create_barcode("barcode_BC014","BC014","code39");
+			this.create_barcode("barcode_BC012","BC012","code39",22);
+			this.create_barcode("barcode_BC013","BC013","code39",22);
+			this.create_barcode("barcode_BC014","BC014","code39",22);
 			
 			
 			//barcode_open 顯示 ?
@@ -618,7 +619,7 @@
 					fix_t_example[0].children[0].children[0].innerText="";
 					fix_t_example.insertBefore("#fix_t_example");
 					//建立新code
-					this.create_barcode('barcode_'+key_id,key_id,"code39");
+					this.create_barcode('barcode_'+key_id,key_id,"code39",22);
 					//console.log(fix_t_example);
 				}
 				$("#fix_t_example").addClass('d-none');
@@ -653,7 +654,7 @@
 				
 			},
 			//建立 一維條碼
-			create_barcode(taget_id,barcode_val,code){
+			create_barcode(taget_id,barcode_val,code,h_size){
 				/*
 				barWidth: 1,barHeight: 50,
 				moduleSize: 5,showHRI: true,
@@ -662,7 +663,7 @@
 				fontSize: 10,output: "css",
 				posX: 0,posY: 0
 				*/
-				var barcode_f = {barWidth:1,barHeight:22,showHRI:false,};
+				var barcode_f = {barWidth:1,barHeight:h_size,showHRI:false,};
 				$("#"+taget_id).barcode(barcode_val,code,barcode_f);     
 			},
 			//執行動作
@@ -708,7 +709,7 @@
 						var w_focus_1 = $('#w_focus_1').val();
 						var w_focus_2 = $('#w_focus_2').val();
 						var w_focus_5 = $('#w_focus_5').val();
-						//進行查詢
+						//進行查詢(製令單/工作站/序號)
 						if(w_focus_1!="" && w_focus_2!="" && w_focus_5!=""){
 							workstation.sendCheck();
 							//如果顯示則關閉
@@ -717,7 +718,7 @@
 						    }	
 						}else{
 							//如果顯示則關閉
-						    if($("#doc_status").css('display')!='none'){
+						    if($("#doc_status").css('display')=='none'){
 								$("#doc_open" ).trigger( "click" );
 						    }	
 						}
@@ -743,9 +744,9 @@
 								barcode_sn_list_ex[0].className="mt-2 package_qty";
 								barcode_sn_list_ex[0].children[0].id = barcode_sn_id;
 								barcode_sn_list_ex[0].children[1].id = barcode_sn_name;
-								barcode_sn_list_ex[0].children[1].innerText = "S/N:"+$("#w_focus_5").val();
+								barcode_sn_list_ex[0].children[1].innerText = "S/N: "+$("#w_focus_5").val();
 								barcode_sn_list_ex.insertBefore("#barcode_sn_list_ex");
-								workstation.create_barcode(barcode_sn_id,$("#w_focus_5").val(),"code39");
+								workstation.create_barcode(barcode_sn_id,$("#w_focus_5").val(),"code39",22);
 								
 								$("#barcode_sn_qty").text($(".package_qty").length);
 							}
@@ -759,24 +760,10 @@
 							//Step3.存檔
 							workstation.sendSave();
 							workstation.barcode_save = true;
+							//workstation.barcode_check = false;
 							
-							//Step4.基本清除
-							$('#w_focus_3').val("");
-							$('#w_focus_4').val("");
-							$('#w_focus_5').val("");
-							$('#w_focus_6').val("");
-							$('#w_focus_7').val("");
-							$('#w_focus_8').val("");
-							$('.doc_c_value').val("");
-							
-							//Step5.更換Class
-							workstation.nb = 5;
-							$("#"+id).removeClass("border-1");
-							$("#"+id).addClass("border-0");
-							$("#w_focus_"+workstation.nb).addClass("border-1");
-							$("#w_focus_"+workstation.nb).removeClass("border-0");
 						}
-						$("#doc_open" ).trigger( "click" );
+						//$("#doc_open" ).trigger( "click" );
 						return false;
 						break;
 					case "BC005":
@@ -795,6 +782,8 @@
 						$("#w_focus_"+workstation.nb).removeClass("border-0");
 						$('.doc_c_value').val("");
 						$(".sn_list").remove();
+						workstation.barcode_save = false;
+						workstation.barcode_check = false;
 						return false;
 						break;
 					case "BC007":
@@ -827,12 +816,23 @@
 							var divToPrint=$('<div>').append($('#barcode_sn_print').clone()).html();
 							var newWin=window.open('','Print-Window');
 							newWin.document.open();
-							newWin.document.write('<html><head>'+css+'</head>'+
-							'<body onload="print()">'+divToPrint+'</body></html>');
+							//數量
+							
+							var print_one='';
+							for(var d =1 ;d<$('#barcode_sn_one_nb').val();d++ ){
+								print_one += divToPrint+'<p style="page-break-after:always"></p>';
+							}
+							print_one+=divToPrint;
+							
+							var print_all = '<html><head>'+css+'</head>'+
+							'<body class="row justify-content-center" onload="print()"><div>'+
+							print_one
+							'</div></body></html>';
+							newWin.document.write(print_all);
 							newWin.document.close();
-							//setTimeout(function(){newWin.close();},300);
+							setTimeout(function(){newWin.close();},500);
 							workstation.barcode_save = false;
-							workstation.barcode_check = false;
+							//workstation.barcode_check = false;
 						}
 						
 						return false;
@@ -851,8 +851,8 @@
 							newWin.document.close();
 							//setTimeout(function(){newWin.close();},300);
 							workstation.barcode_save = false;
-							workstation.barcode_check = false;
-							$("#doc_open" ).trigger( "click" );
+							//workstation.barcode_check = false;
+							
 							
 							//Step2.印出->清除
 							if($('#sn_cumulative_number').val()<=$('.sn_cumulative_list').length){
@@ -908,7 +908,7 @@
 
 								fix_t_example.insertBefore("#fix_i_example");
 								//建立新code
-								workstation.create_barcode('barcode_'+key_id,key_id,"code39");
+								workstation.create_barcode('barcode_'+key_id,key_id,"code39",22);
 								//console.log(fix_t_example);
 							}
 							$("#fix_i_example").addClass('d-none');
@@ -939,8 +939,8 @@
 					$('#'+id).val(code);
 					//是SN欄位則登記
 					if(workstation.nb==5){
-						$('#barcode_sn_name').text("S/N:"+code);
-						workstation.create_barcode("barcode_sn_one",code,"code39");
+						$('#barcode_sn_name').text("S/N: "+code);
+						workstation.create_barcode("barcode_sn_one",code,"code39",30);
 						
 					}
 					//自動位移
@@ -1005,6 +1005,32 @@
 				req.call_bk_vals={};
 				main.ajaxSend(s_url, s_type, s_data);
 			},
+			//存檔成功後清除資料
+			saveReturn(){
+				//Step4-0.過站完 再檢查一次
+				$("#BC003" ).trigger( "click" );
+				setTimeout(function(){
+					//清除
+					//Step4-1.基本清除
+					$('#w_focus_3').val("");
+					$('#w_focus_4').val("");
+					$('#w_focus_5').val("");
+				  }, 2000);
+				setTimeout(function(){
+					//自動列印
+					if($('#sn_one_check').is(":checked")){
+						$("#BC011" ).trigger( "click" );						
+					}
+				}, 500);
+				//Step5.更換Class
+				var id =$(".border-1").attr("id");
+				workstation.nb = 5;
+				$("#"+id).removeClass("border-1");
+				$("#"+id).addClass("border-0");
+				$("#w_focus_"+workstation.nb).addClass("border-1");
+				$("#w_focus_"+workstation.nb).removeClass("border-0");
+				 
+            },
 			//檢查
 			sendCheck() {
 				console.log("sendCheck");	
@@ -1071,16 +1097,20 @@
 				 $("#workdatation_program_name").text( main.allData.body.workdatation_program_name);
 				 
 				 //自動位移
-				 if($(".sn_list").length>0){
-					//更換Class
-						var id =$(".border-1").attr("id");
-						workstation.nb=6;
-						$("#"+id).removeClass("border-1");
-						$("#"+id).addClass("border-0");
-						$("#w_focus_6").addClass("border-1");
-						$("#w_focus_6").removeClass("border-0");
+				 var id =$(".border-1").attr("id");
+				 workstation.nb=5;
+				 if($(".sn_list").length>0 && $("#w_focus_5").val()!=""){
+					workstation.nb=6;
+										 
 				 }
+				//更換Class
+				$("#"+id).removeClass("border-1");
+				$("#"+id).addClass("border-0");
+				$("#w_focus_"+workstation.nb).addClass("border-1");
+				$("#w_focus_"+workstation.nb).removeClass("border-0");
+				
             },
+            
 		},
 		//移除監聽事件
 		beforeDestroy() {

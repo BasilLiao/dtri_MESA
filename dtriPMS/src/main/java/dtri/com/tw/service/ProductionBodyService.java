@@ -12,6 +12,8 @@ import javax.persistence.Query;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +37,7 @@ public class ProductionBodyService {
 	EntityManager em;
 
 	// 取得當前 資料清單
-	
+
 	public PackageBean getData(JSONObject body, int page, int p_size) {
 		PackageBean bean = new PackageBean();
 		List<ProductionBody> productionBodies = new ArrayList<ProductionBody>();
@@ -45,8 +47,7 @@ public class ProductionBodyService {
 			page = 0;
 			p_size = 100;
 		}
-		// PageRequest pageable = PageRequest.of(page, p_size,
-		// Sort.by("pbid").descending());
+		PageRequest pageable = PageRequest.of(page, p_size, Sort.by("pbid").ascending());
 		String phprid = "";
 		String phmodel = "";
 		String sysstatus = "0";
@@ -160,20 +161,21 @@ public class ProductionBodyService {
 			a_val.put((new JSONObject()).put("value", "完成").put("key", "true"));
 			a_val.put((new JSONObject()).put("value", "未完成").put("key", "false"));
 			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.SEL, FFM.Type.TEXT, "false", "false", FFM.Wri.W_Y, "col-md-1", true, a_val, "pb_check", "工作流程"));
-			
+
 			a_val = new JSONArray();
 			a_val.put((new JSONObject()).put("value", "有效").put("key", "0"));
 			a_val.put((new JSONObject()).put("value", "已出貨").put("key", "1"));
 			a_val.put((new JSONObject()).put("value", "可拆解").put("key", "2"));
 			a_val.put((new JSONObject()).put("value", "已失效").put("key", "3"));
-			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.SEL, FFM.Type.TEXT, "false", "false", FFM.Wri.W_Y, "col-md-2", true, a_val, "pb_useful_sn", "產品狀態"));
-			
-			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.INP, FFM.Type.NUMB, "3", "3", FFM.Wri.W_N, "col-md-2", true, a_val, "pb_w_years", "保固年份"));
+			obj_m.put(
+					FFS.h_m(FFM.Dno.D_S, FFM.Tag.SEL, FFM.Type.TEXT, "false", "false", FFM.Wri.W_Y, "col-md-2", true, a_val, "pb_useful_sn", "產品狀態"));
+
+			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.INP, FFM.Type.NUMB, "3", "3", FFM.Wri.W_N, "col-md-1", true, a_val, "pb_w_years", "保固年份"));
 			a_val = new JSONArray();
 			a_val.put((new JSONObject()).put("value", "正常").put("key", "0"));
 			a_val.put((new JSONObject()).put("value", "異常").put("key", "1"));
 			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.SEL, FFM.Type.TEXT, "", "0", FFM.Wri.W_Y, "col-md-2", true, a_val, "sys_status", "系統狀態"));
-			
+
 			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.INP, FFM.Type.TEXT, "", "", FFM.Wri.W_N, "col-md-12", true, n_val, "pb_f_value", "維修項目"));
 			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.TTA, FFM.Type.TEXT, "", "", FFM.Wri.W_N, "col-md-12", true, n_val, "pb_f_note", "維修說明"));
 
@@ -216,8 +218,6 @@ public class ProductionBodyService {
 			obj_m.put(FFS.h_m(FFM.Dno.D_N, FFM.Tag.INP, FFM.Type.TEXT, "", "", FFM.Wri.W_N, "col-md-2", false, n_val, "sys_m_date", "修改時間"));
 			obj_m.put(FFS.h_m(FFM.Dno.D_N, FFM.Tag.INP, FFM.Type.TEXT, "", "", FFM.Wri.W_N, "col-md-2", false, n_val, "sys_m_user", "修改人"));
 			obj_m.put(FFS.h_m(FFM.Dno.D_N, FFM.Tag.INP, FFM.Type.NUMB, "0", "0", FFM.Wri.W_Y, "col-md-1", true, n_val, "sys_sort", "排序"));
-
-			
 
 			bean.setCell_modify(obj_m);
 
@@ -300,8 +300,9 @@ public class ProductionBodyService {
 		}
 
 		// 查詢SN欄位+產品型號+製令單號
-		String nativeQuery = "SELECT b.pb_id FROM production_body b " + "join production_header h on b.pb_g_id = h.ph_pb_g_id "
-				+ "join production_records p on h.ph_pr_id = p.pr_id WHERE ";
+		String nativeQuery = "SELECT b.pb_id FROM production_body b " + //
+				"join production_header h on b.pb_g_id = h.ph_pb_g_id " + //
+				"join production_records p on h.ph_pr_id = p.pr_id WHERE ";
 		if (!pb_sn_value.equals("")) {
 			nativeQuery += " (:pb_sn_value='' or " + pb_sn_name + " LIKE :pb_sn_value) and ";
 		}
@@ -312,7 +313,6 @@ public class ProductionBodyService {
 		nativeQuery += " (:ph_model='' or p.pr_p_model LIKE :ph_model) and ";
 		nativeQuery += " (:ph_pr_id='' or h.ph_pr_id LIKE :ph_pr_id) and ";
 		nativeQuery += " (b.pb_g_id != 0) group by b.pb_id ";
-		nativeQuery += " order by b.pb_id limit " + p_size + " offset " + page + " ";
 		Query query = em.createNativeQuery(nativeQuery);
 		if (!pb_sn_value.equals("")) {
 			query.setParameter("pb_sn_value", "%" + pb_sn_value + "%");
@@ -327,9 +327,9 @@ public class ProductionBodyService {
 		if ((!pb_sn_value.equals("") && pbid.size() > 0) || (pb_sn_value.equals("") || pb_sn_date_s.equals(""))) {
 			if (pb_sn_check == null) {
 				// 查詢有特定pb_id
-				productionBodies = bodyDao.findAllByProductionBody(Integer.parseInt(sysstatus), pbid);
+				productionBodies = bodyDao.findAllByProductionBody(Integer.parseInt(sysstatus), pbid, pageable);
 			} else {
-				productionBodies = bodyDao.findAllByProductionBody(Integer.parseInt(sysstatus), pbid, Boolean.parseBoolean(pb_sn_check));
+				productionBodies = bodyDao.findAllByProductionBody(Integer.parseInt(sysstatus), pbid, Boolean.parseBoolean(pb_sn_check), pageable);
 			}
 		}
 

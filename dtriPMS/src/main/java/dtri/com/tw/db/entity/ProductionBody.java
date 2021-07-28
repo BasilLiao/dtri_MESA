@@ -158,6 +158,47 @@ public class ProductionBody implements Serializable {
 	@Column(name = "pb_w_name20", columnDefinition = "varchar(30)")
 	private String pbwname20;
 
+	@Column(name = "pb_w_p_date01", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate01;
+	@Column(name = "pb_w_p_date02", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate02;
+	@Column(name = "pb_w_p_date03", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate03;
+	@Column(name = "pb_w_p_date04", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate04;
+	@Column(name = "pb_w_p_date05", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate05;
+	@Column(name = "pb_w_p_date06", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate06;
+	@Column(name = "pb_w_p_date07", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate07;
+	@Column(name = "pb_w_p_date08", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate08;
+	@Column(name = "pb_w_p_date09", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate09;
+	@Column(name = "pb_w_p_date10", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate10;
+	@Column(name = "pb_w_p_date11", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate11;
+	@Column(name = "pb_w_p_date12", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate12;
+	@Column(name = "pb_w_p_date13", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate13;
+	@Column(name = "pb_w_p_date14", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate14;
+	@Column(name = "pb_w_p_date15", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate15;
+	@Column(name = "pb_w_p_date16", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate16;
+	@Column(name = "pb_w_p_date17", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate17;
+	@Column(name = "pb_w_p_date18", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate18;
+	@Column(name = "pb_w_p_date19", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate19;
+	@Column(name = "pb_w_p_date20", columnDefinition = "TIMESTAMP ")
+	private Date pbwpdate20;
+
 	@Column(name = "pb_value01", columnDefinition = "varchar(50)")
 	private String pbvalue01;
 	@Column(name = "pb_value02", columnDefinition = "varchar(50)")
@@ -264,10 +305,10 @@ public class ProductionBody implements Serializable {
 
 	@Column(name = "pb_l_path", columnDefinition = "varchar(255) default ''")
 	private String pblpath;
-	
+
 	@Column(name = "pb_l_path_oqc", columnDefinition = "varchar(255) default ''")
 	private String pblpathoqc;
-	
+
 	@Column(name = "pb_l_size")
 	private String pblsize;
 
@@ -1049,6 +1090,166 @@ public class ProductionBody implements Serializable {
 
 	public void setPbwname20(String pbwname20) {
 		this.pbwname20 = pbwname20;
+	}
+
+	public Date getPbwpdate01() {
+		return pbwpdate01;
+	}
+
+	public void setPbwpdate01(Date pbwpdate01) {
+		this.pbwpdate01 = pbwpdate01;
+	}
+
+	public Date getPbwpdate02() {
+		return pbwpdate02;
+	}
+
+	public void setPbwpdate02(Date pbwpdate02) {
+		this.pbwpdate02 = pbwpdate02;
+	}
+
+	public Date getPbwpdate03() {
+		return pbwpdate03;
+	}
+
+	public void setPbwpdate03(Date pbwpdate03) {
+		this.pbwpdate03 = pbwpdate03;
+	}
+
+	public Date getPbwpdate04() {
+		return pbwpdate04;
+	}
+
+	public void setPbwpdate04(Date pbwpdate04) {
+		this.pbwpdate04 = pbwpdate04;
+	}
+
+	public Date getPbwpdate05() {
+		return pbwpdate05;
+	}
+
+	public void setPbwpdate05(Date pbwpdate05) {
+		this.pbwpdate05 = pbwpdate05;
+	}
+
+	public Date getPbwpdate06() {
+		return pbwpdate06;
+	}
+
+	public void setPbwpdate06(Date pbwpdate06) {
+		this.pbwpdate06 = pbwpdate06;
+	}
+
+	public Date getPbwpdate07() {
+		return pbwpdate07;
+	}
+
+	public void setPbwpdate07(Date pbwpdate07) {
+		this.pbwpdate07 = pbwpdate07;
+	}
+
+	public Date getPbwpdate08() {
+		return pbwpdate08;
+	}
+
+	public void setPbwpdate08(Date pbwpdate08) {
+		this.pbwpdate08 = pbwpdate08;
+	}
+
+	public Date getPbwpdate09() {
+		return pbwpdate09;
+	}
+
+	public void setPbwpdate09(Date pbwpdate09) {
+		this.pbwpdate09 = pbwpdate09;
+	}
+
+	public Date getPbwpdate10() {
+		return pbwpdate10;
+	}
+
+	public void setPbwpdate10(Date pbwpdate10) {
+		this.pbwpdate10 = pbwpdate10;
+	}
+
+	public Date getPbwpdate11() {
+		return pbwpdate11;
+	}
+
+	public void setPbwpdate11(Date pbwpdate11) {
+		this.pbwpdate11 = pbwpdate11;
+	}
+
+	public Date getPbwpdate12() {
+		return pbwpdate12;
+	}
+
+	public void setPbwpdate12(Date pbwpdate12) {
+		this.pbwpdate12 = pbwpdate12;
+	}
+
+	public Date getPbwpdate13() {
+		return pbwpdate13;
+	}
+
+	public void setPbwpdate13(Date pbwpdate13) {
+		this.pbwpdate13 = pbwpdate13;
+	}
+
+	public Date getPbwpdate14() {
+		return pbwpdate14;
+	}
+
+	public void setPbwpdate14(Date pbwpdate14) {
+		this.pbwpdate14 = pbwpdate14;
+	}
+
+	public Date getPbwpdate15() {
+		return pbwpdate15;
+	}
+
+	public void setPbwpdate15(Date pbwpdate15) {
+		this.pbwpdate15 = pbwpdate15;
+	}
+
+	public Date getPbwpdate16() {
+		return pbwpdate16;
+	}
+
+	public void setPbwpdate16(Date pbwpdate16) {
+		this.pbwpdate16 = pbwpdate16;
+	}
+
+	public Date getPbwpdate17() {
+		return pbwpdate17;
+	}
+
+	public void setPbwpdate17(Date pbwpdate17) {
+		this.pbwpdate17 = pbwpdate17;
+	}
+
+	public Date getPbwpdate18() {
+		return pbwpdate18;
+	}
+
+	public void setPbwpdate18(Date pbwpdate18) {
+		this.pbwpdate18 = pbwpdate18;
+	}
+
+	public Date getPbwpdate19() {
+		return pbwpdate19;
+	}
+
+	public void setPbwpdate19(Date pbwpdate19) {
+		this.pbwpdate19 = pbwpdate19;
+	}
+
+	public Date getPbwpdate20() {
+		return pbwpdate20;
+	}
+
+	public void setPbwpdate20(Date pbwpdate20) {
+		this.pbwpdate20 = pbwpdate20;
 	}
 
 	public String getPbltext() {

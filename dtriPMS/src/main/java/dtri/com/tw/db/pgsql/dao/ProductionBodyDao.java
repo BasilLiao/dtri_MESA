@@ -2,6 +2,7 @@ package dtri.com.tw.db.pgsql.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -35,17 +36,17 @@ public interface ProductionBodyDao extends JpaRepository<ProductionBody, Long> {
 			+ "( b.sysstatus = :sysstatus ) and "//
 			+ "(coalesce(:pbid, null) is null or b.pbid IN :pbid ) and "// coalesce 回傳非NULL值
 			+ "(b.pbid!=0 or b.pbid!=1) and (b.sysheader!=true) "//
-			+ " order by b.pbgid desc,b.sysheader desc, b.sysmdate desc ")
-	List<ProductionBody> findAllByProductionBody(@Param("sysstatus") Integer sys_status, @Param("pbid") List<Integer> pb_id);
+			+ " order by b.pbgid desc,b.pbid asc, b.sysmdate desc ")
+	List<ProductionBody> findAllByProductionBody(@Param("sysstatus") Integer sys_status, @Param("pbid") List<Integer> pb_id,Pageable pageable);
 
 	// 查詢一部分_Body By Check
 	@Query(value = "SELECT b FROM ProductionBody b WHERE "//
 			+ "( b.sysstatus = :sysstatus ) and "//
 			+ "(coalesce(:pbid, null) is null or b.pbid IN :pbid ) and "// coalesce 回傳非NULL值
 			+ "(b.pbid!=0 or b.pbid!=1) and (b.sysheader!=true) and  (b.pbcheck=:pbcheck)"//
-			+ " order by b.pbgid desc,b.sysmdate desc ,b.sysheader desc")
+			+ " order by b.pbgid desc,b.pbid asc ,b.sysheader desc")
 	List<ProductionBody> findAllByProductionBody(@Param("sysstatus") Integer sys_status, @Param("pbid") List<Integer> pb_id,
-			@Param("pbcheck") Boolean pb_check);
+			@Param("pbcheck") Boolean pb_check,Pageable pageable);
 
 	// 移除單一SN
 	Long deleteByPbid(Integer id);

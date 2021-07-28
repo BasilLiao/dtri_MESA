@@ -33,6 +33,7 @@ import dtri.com.tw.db.pgsql.dao.ProductionHeaderDao;
 import dtri.com.tw.db.pgsql.dao.SystemConfigDao;
 import dtri.com.tw.db.pgsql.dao.WorkstationDao;
 import dtri.com.tw.db.pgsql.dao.WorkstationProgramDao;
+import dtri.com.tw.tools.Fm_Time;
 
 @Service
 public class WorkstationWorkService {
@@ -260,7 +261,8 @@ public class WorkstationWorkService {
 						JSONObject object_body_all = new JSONObject();
 						ph_all.forEach(one -> {
 							JSONObject object_body = new JSONObject();
-							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "ph_s_date", one.getPhsdate() == null ? "" : one.getPhsdate());
+							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "ph_s_date",
+									one.getPhsdate() == null ? "" : Fm_Time.to_yMd_Hms(one.getPhsdate()));
 							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "ph_pr_id", one.getProductionRecords().getPrid());
 							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "pr_p_model", one.getProductionRecords().getPrpmodel());
 							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "pr_bom_id", one.getProductionRecords().getPrbomid());
@@ -489,11 +491,11 @@ public class WorkstationWorkService {
 					ProductionRecords phprid = new ProductionRecords();
 					phprid.setPrid(list.getString("ph_pr_id"));
 					ProductionHeader p_header = phDao.findAllByProductionRecords(phprid).get(0);
-					p_header.setSysstatus(1);
 					// 啟動時間
 					if (p_header.getSysstatus() == 0) {
 						p_header.setPhsdate(new Date());
 					}
+					p_header.setSysstatus(1);
 
 					// 關聯SN
 					List<ProductionBody> p_body = pbDao.findAllByPbgidOrderByPbsnAsc(p_header.getPhpbgid());
