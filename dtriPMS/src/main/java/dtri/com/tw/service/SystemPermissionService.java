@@ -167,7 +167,7 @@ public class SystemPermissionService {
 					// 重複 則取同樣G_ID
 					sys_p.setSpgid(sys_p_g.get(0).getSpgid());
 					// 同步添加到ADMIN
-					sys_g.setSggid(1);
+					sys_g.setSggid(1l);
 					sys_g.setSystemPermission(sys_p);
 					sys_g.setSyssort(sys_p.getSyssort());
 					sys_g.setSgpermission("1111111111");
@@ -176,7 +176,7 @@ public class SystemPermissionService {
 
 					sys_p.setSpgid((permissionDao.getSystem_config_g_seq()));
 					// 同步添加到ADMIN
-					sys_g.setSggid(1);
+					sys_g.setSggid(1l);
 					sys_g.setSystemPermission(sys_p);
 					sys_g.setSyssort(sys_p.getSyssort());
 					sys_g.setSgpermission("1111111111");
@@ -185,7 +185,7 @@ public class SystemPermissionService {
 				permissionDao.save(sys_p);
 
 				// 同步添加到ADMIN
-				sys_g = groupDao.findBySgidOrderBySgidAscSyssortAsc(1).get(0);
+				sys_g = groupDao.findBySgidOrderBySgidAscSyssortAsc(1l).get(0);
 				SystemGroup sys_g_new = new SystemGroup();
 				sys_g_new.setSystemPermission(sys_p);
 				sys_g_new.setSggid(sys_g.getSgid());
@@ -235,7 +235,7 @@ public class SystemPermissionService {
 				permissionDao.save(sys_p);
 
 				// 同步添加到ADMIN
-				SystemGroup sys_g = groupDao.findBySgidOrderBySgidAscSyssortAsc(1).get(0);
+				SystemGroup sys_g = groupDao.findBySgidOrderBySgidAscSyssortAsc(1l).get(0);
 				SystemGroup sys_g_new = new SystemGroup();
 				sys_g_new.setSystemPermission(sys_p);
 				sys_g_new.setSggid(sys_g.getSgid());
@@ -261,9 +261,9 @@ public class SystemPermissionService {
 				// 物件轉換
 				SystemPermission sys_p = new SystemPermission();
 				JSONObject data = (JSONObject) one;
-				sys_p.setSpid(data.getInt("sp_id"));
+				sys_p.setSpid(data.getLong("sp_id"));
 				sys_p.setSpname(data.getString("sp_name"));
-				sys_p.setSpgid(data.getInt("sp_g_id"));
+				sys_p.setSpgid(data.getLong("sp_g_id"));
 				sys_p.setSpgname(data.getString("sp_g_name"));
 				sys_p.setSpcontrol(data.getString("sp_control"));
 				sys_p.setSppermission(data.getString("sp_permission"));
@@ -303,7 +303,7 @@ public class SystemPermissionService {
 				// 物件轉換
 				SystemPermission sys_p = new SystemPermission();
 				JSONObject data = (JSONObject) one;
-				sys_p.setSpid(data.getInt("sp_id"));
+				sys_p.setSpid(data.getLong("sp_id"));
 
 				permissionDao.deleteBySpidAndSysheader(sys_p.getSpid(), false);
 				check = true;

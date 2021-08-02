@@ -121,7 +121,7 @@ public class ProductionConfigService {
 			pb_value = body.getJSONObject("search").getString("pb_value");
 			pb_value = pb_value.equals("") ? null : pb_value;
 		}
-		productionBodys = bodyDao.findAllByPbid(0);
+		productionBodys = bodyDao.findAllByPbid(0L);
 		String pb_value_check = pb_value;
 		// 放入包裝(body) [01 是排序][_b__ 是分割直][資料庫欄位名稱]
 		JSONArray object_bodys = new JSONArray();
@@ -213,7 +213,7 @@ public class ProductionConfigService {
 			JSONArray list = body.getJSONArray("modify");
 			for (Object one : list) {
 				// 物件轉換
-				ProductionBody p_body = bodyDao.findAllByPbid(0).get(0);
+				ProductionBody p_body = bodyDao.findAllByPbid(0l).get(0);
 				JSONObject data = (JSONObject) one;
 				// SN類別
 

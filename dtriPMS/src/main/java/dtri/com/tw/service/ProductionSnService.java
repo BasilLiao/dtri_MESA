@@ -53,7 +53,7 @@ public class ProductionSnService {
 			object_header.put(FFS.ord((ord += 1), FFM.Hmb.H) + "sys_m_date", FFS.h_t("修改時間", "180px", FFM.Wri.W_Y));
 			object_header.put(FFS.ord((ord += 1), FFM.Hmb.H) + "sys_m_user", FFS.h_t("修改人", "100px", FFM.Wri.W_Y));
 
-			object_header.put(FFS.ord((ord += 1), FFM.Hmb.H) + "sys_note", FFS.h_t("備註", "300px", FFM.Wri.W_Y));
+			object_header.put(FFS.ord((ord += 1), FFM.Hmb.H) + "sys_note", FFS.h_t("備註", "500px", FFM.Wri.W_Y));
 			object_header.put(FFS.ord((ord += 1), FFM.Hmb.H) + "sys_sort", FFS.h_t("排序", "100px", FFM.Wri.W_N));
 			object_header.put(FFS.ord((ord += 1), FFM.Hmb.H) + "sys_ver", FFS.h_t("版本", "100px", FFM.Wri.W_N));
 			object_header.put(FFS.ord((ord += 1), FFM.Hmb.H) + "sys_status", FFS.h_t("狀態", "100px", FFM.Wri.W_N));
@@ -160,7 +160,7 @@ public class ProductionSnService {
 				ProductionSN sys_c = new ProductionSN();
 				JSONObject data = (JSONObject) one;
 				// 檢查是否在特定屬性下(此處限制)
-				ArrayList<ProductionSN> sn = snDao.findAllBySysheaderAndPsgid(true, data.getInt("ps_g_id"));
+				ArrayList<ProductionSN> sn = snDao.findAllBySysheaderAndPsgid(true, data.getLong("ps_g_id"));
 				if (sn.size() == 0) {
 					return false;
 				}
@@ -244,8 +244,8 @@ public class ProductionSnService {
 				// 物件轉換
 				ProductionSN sys_p = new ProductionSN();
 				JSONObject data = (JSONObject) one;
-				sys_p.setPsid(data.getInt("ps_id"));
-				sys_p.setPsgid(data.getInt("ps_g_id"));
+				sys_p.setPsid(data.getLong("ps_id"));
+				sys_p.setPsgid(data.getLong("ps_g_id"));
 				sys_p.setPsname(data.getString("ps_name"));
 				sys_p.setPsgname(data.getString("ps_g_name"));
 				sys_p.setPsvalue(data.getString("ps_value"));
@@ -296,8 +296,8 @@ public class ProductionSnService {
 				// 父類別除外
 				if (!data.getBoolean("sys_header")) {
 					// 必須要保持兩筆資料以上
-					if (snDao.findAllBySysheaderAndPsgid(false, data.getInt("ps_g_id")).size() > 1) {
-						sys_p.setPsid(data.getInt("ps_id"));
+					if (snDao.findAllBySysheaderAndPsgid(false, data.getLong("ps_g_id")).size() > 1) {
+						sys_p.setPsid(data.getLong("ps_id"));
 						snDao.deleteByPsidAndSysheader(sys_p.getPsid(), false);
 					}
 					check = true;

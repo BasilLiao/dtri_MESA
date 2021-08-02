@@ -193,11 +193,11 @@ public class WorkstationProgramService {
 				if (data.getBoolean("sys_header")) {
 					// 父
 					sys_wp_f = new WorkstationProgram();
-					int wpgid = programDao.getWorkstation_program_g_seq();
+					Long wpgid = programDao.getWorkstation_program_g_seq();
 					sys_wp_f.setWpgid(wpgid);
 					sys_wp_f.setWpcname(data.getString("wp_c_name"));
 					sys_wp_f.setWpname(data.getString("wp_name"));
-					sys_wp_f.setWpwgid(0);
+					sys_wp_f.setWpwgid(0l);
 					sys_wp_f.setSyssort(0);
 					sys_wp_f.setSysnote("");
 					sys_wp_f.setSysstatus(0);
@@ -208,7 +208,7 @@ public class WorkstationProgramService {
 				} else {
 					// 如果為子目錄 非群組
 					if (!sys_wp_f.getSysheader()) {
-						sys_wp_f = programDao.findAllByWpgidAndSysheaderOrderBySyssortAsc(data.getInt("wp_g_id"), true).get(0);
+						sys_wp_f = programDao.findAllByWpgidAndSysheaderOrderBySyssortAsc(data.getLong("wp_g_id"), true).get(0);
 					}
 					// 子
 					sys_wp = new WorkstationProgram();
@@ -218,7 +218,7 @@ public class WorkstationProgramService {
 					sys_wp.setSysnote("");
 					sys_wp.setSyssort(data.getInt("sys_sort"));
 					sys_wp.setSysstatus(data.getInt("sys_status"));
-					sys_wp.setWpwgid(data.getInt("wp_w_g_id"));
+					sys_wp.setWpwgid(data.getLong("wp_w_g_id"));
 					sys_wp.setSysheader(false);
 					sys_wp.setSysmuser(user.getSuaccount());
 					sys_wp.setSyscuser(user.getSuaccount());
@@ -256,11 +256,11 @@ public class WorkstationProgramService {
 				if (data.getBoolean("sys_header")) {
 					// 父
 					sys_wp_f = new WorkstationProgram();
-					int wpgid = programDao.getWorkstation_program_g_seq();
+					Long wpgid = programDao.getWorkstation_program_g_seq();
 					sys_wp_f.setWpgid(wpgid);
 					sys_wp_f.setWpcname(data.getString("wp_c_name"));
 					sys_wp_f.setWpname(data.getString("wp_name"));
-					sys_wp_f.setWpwgid(0);
+					sys_wp_f.setWpwgid(0l);
 					sys_wp_f.setSyssort(0);
 					sys_wp_f.setSysnote("");
 					sys_wp_f.setSysstatus(0);
@@ -277,7 +277,7 @@ public class WorkstationProgramService {
 					sys_wp.setSysnote("");
 					sys_wp.setSyssort(data.getInt("sys_sort"));
 					sys_wp.setSysstatus(data.getInt("sys_status"));
-					sys_wp.setWpwgid(data.getInt("wp_w_g_id"));
+					sys_wp.setWpwgid(data.getLong("wp_w_g_id"));
 					sys_wp.setSysheader(false);
 					sys_wp.setSysmuser(user.getSuaccount());
 					sys_wp.setSyscuser(user.getSuaccount());
@@ -311,11 +311,11 @@ public class WorkstationProgramService {
 						return false;
 					}
 					sys_p_f = new WorkstationProgram();
-					sys_p_f.setWpid(data.getInt("wp_id"));
+					sys_p_f.setWpid(data.getLong("wp_id"));
 					sys_p_f.setWpname(data.getString("wp_name"));
-					sys_p_f.setWpgid(data.getInt("wp_g_id"));
+					sys_p_f.setWpgid(data.getLong("wp_g_id"));
 					sys_p_f.setWpcname(data.getString("wp_c_name"));
-					sys_p_f.setWpwgid(0);
+					sys_p_f.setWpwgid(0l);
 					sys_p_f.setSysnote("");
 					sys_p_f.setSyssort(0);
 					sys_p_f.setSysstatus(data.getInt("sys_status"));
@@ -325,7 +325,7 @@ public class WorkstationProgramService {
 					programDao.save(sys_p_f);
 
 					// 更新子類別
-					ArrayList<WorkstationProgram> sys_p_s = programDao.findAllByWpgidOrderBySyssortAsc(data.getInt("wp_g_id"));
+					ArrayList<WorkstationProgram> sys_p_s = programDao.findAllByWpgidOrderBySyssortAsc(data.getLong("wp_g_id"));
 					sys_p_s.forEach(wp -> {
 						wp.setWpname(data.getString("wp_name"));
 						wp.setWpcname(data.getString("wp_c_name"));
@@ -333,11 +333,11 @@ public class WorkstationProgramService {
 					programDao.saveAll(sys_p_s);
 				} else {
 					sys_p = new WorkstationProgram();
-					sys_p.setWpid(data.getInt("wp_id"));
+					sys_p.setWpid(data.getLong("wp_id"));
 					sys_p.setWpgid(sys_p_f.getWpgid());
 					sys_p.setWpname(sys_p_f.getWpname());
 					sys_p.setWpcname(sys_p_f.getWpcname());
-					sys_p.setWpwgid(data.getInt("wp_w_g_id"));
+					sys_p.setWpwgid(data.getLong("wp_w_g_id"));
 					sys_p.setSysnote("");
 					sys_p.setSyssort(data.getInt("sys_sort"));
 					sys_p.setSysstatus(data.getInt("sys_status"));
@@ -370,10 +370,10 @@ public class WorkstationProgramService {
 				JSONObject data = (JSONObject) one;
 				// 群組移除
 				if (data.getBoolean("sys_header")) {
-					programDao.deleteByWpgid(data.getInt("wp_g_id"));
+					programDao.deleteByWpgid(data.getLong("wp_g_id"));
 					continue;
 				}
-				sys_p.setWpid(data.getInt("wp_id"));
+				sys_p.setWpid(data.getLong("wp_id"));
 				programDao.deleteByWpidAndSysheader(sys_p.getWpid(), false);
 				check = true;
 			}

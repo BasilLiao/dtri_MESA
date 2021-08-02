@@ -83,16 +83,16 @@ public class WorkstationProgram {
 	@Column(name = "wp_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "workstation_program_seq")
 	@SequenceGenerator(name = "workstation_program_seq", sequenceName = "workstation_program_seq", allocationSize = 1)
-	private Integer wpid;
+	private Long wpid;
 
 	@Column(name = "wp_g_id", nullable = false)
-	private Integer wpgid;
+	private Long wpgid;
 
 	@Column(name = "wp_name", nullable = false, columnDefinition = "varchar(50)")
 	private String wpname;
 
 	@Column(name = "wp_w_g_id", nullable = false)
-	private Integer wpwgid;
+	private Long wpwgid;
 
 	@Column(name = "wp_c_name", nullable = false, columnDefinition = "varchar(50)")
 	private String wpcname;
@@ -169,19 +169,19 @@ public class WorkstationProgram {
 		this.syssort = syssort;
 	}
 
-	public Integer getWpid() {
+	public Long getWpid() {
 		return wpid;
 	}
 
-	public void setWpid(Integer wpid) {
+	public void setWpid(Long wpid) {
 		this.wpid = wpid;
 	}
 
-	public Integer getWpgid() {
+	public Long getWpgid() {
 		return wpgid;
 	}
 
-	public void setWpgid(Integer wpgid) {
+	public void setWpgid(Long wpgid) {
 		this.wpgid = wpgid;
 	}
 
@@ -193,11 +193,11 @@ public class WorkstationProgram {
 		this.wpname = wpname;
 	}
 
-	public Integer getWpwgid() {
+	public Long getWpwgid() {
 		return wpwgid;
 	}
 
-	public void setWpwgid(Integer wpwgid) {
+	public void setWpwgid(Long wpwgid) {
 		this.wpwgid = wpwgid;
 	}
 

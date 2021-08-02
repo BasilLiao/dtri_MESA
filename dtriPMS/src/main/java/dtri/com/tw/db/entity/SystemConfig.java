@@ -71,13 +71,13 @@ public class SystemConfig {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "system_config_seq")
 	@SequenceGenerator(name = "system_config_seq", sequenceName = "system_config_seq",allocationSize =1)
 	@Column(name = "sc_id")
-	private Integer scid;
+	private Long scid;
 
 	@Column(name = "sc_name", nullable = false, columnDefinition = "varchar(50)")
 	private String scname;
 
 	@Column(name = "sc_g_id", nullable = false)
-	private Integer scgid;
+	private Long scgid;
 
 	@Column(name = "sc_g_name", nullable = false, columnDefinition = "varchar(50)")
 	private String scgname;
@@ -157,11 +157,11 @@ public class SystemConfig {
 		this.sysstatus = sysstatus;
 	}
 
-	public Integer getScid() {
+	public Long getScid() {
 		return scid;
 	}
 
-	public void setScid(Integer scid) {
+	public void setScid(Long scid) {
 		this.scid = scid;
 	}
 
@@ -173,11 +173,11 @@ public class SystemConfig {
 		this.scname = scname;
 	}
 
-	public Integer getScgid() {
+	public Long getScgid() {
 		return scgid;
 	}
 
-	public void setScgid(Integer scgid) {
+	public void setScgid(Long scgid) {
 		this.scgid = scgid;
 	}
 

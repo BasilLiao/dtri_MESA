@@ -92,10 +92,10 @@ public class Workstation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "workstation_seq")
 	@SequenceGenerator(name = "workstation_seq", sequenceName = "workstation_seq", allocationSize = 1)
 	@Column(name = "w_id")
-	private Integer wid;
+	private Long wid;
 
 	@Column(name = "w_g_id", nullable = false)
-	private Integer wgid;
+	private Long wgid;
 
 	@ManyToOne(targetEntity = WorkstationItem.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "w_i_id")
@@ -111,7 +111,7 @@ public class Workstation {
 	private String wpbcell;
 
 	@Column(name = "w_sg_id", columnDefinition = "int default 0")
-	private Integer wsgid;
+	private Long wsgid;
 
 	@Column(name = "w_sg_name", columnDefinition = "varchar(50) default ''")
 	private String wsgname;
@@ -192,19 +192,19 @@ public class Workstation {
 		this.sysheader = sysheader;
 	}
 
-	public Integer getWid() {
+	public Long getWid() {
 		return wid;
 	}
 
-	public void setWid(Integer wid) {
+	public void setWid(Long wid) {
 		this.wid = wid;
 	}
 
-	public Integer getWgid() {
+	public Long getWgid() {
 		return wgid;
 	}
 
-	public void setWgid(Integer wgid) {
+	public void setWgid(Long wgid) {
 		this.wgid = wgid;
 	}
 
@@ -240,11 +240,11 @@ public class Workstation {
 		this.wpbcell = wpbcell;
 	}
 
-	public Integer getWsgid() {
+	public Long getWsgid() {
 		return wsgid;
 	}
 
-	public void setWsgid(Integer wsgid) {
+	public void setWsgid(Long wsgid) {
 		this.wsgid = wsgid;
 	}
 

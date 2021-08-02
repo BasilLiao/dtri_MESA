@@ -24,6 +24,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  *      ph_pr_type : 類型-製令工單<br>
  *      ph_pb_id : 關聯-SN清單<br>
  *      ph_pb_g_id :關聯群組-SN清單<br>
+ *      ph_p_name:(客戶)產品名稱/產品批次驗證序號(product name/part name)
  *      ph_wpro_id : 工作站<br>
  *      ph_s_date : 開始製成 <br>
  *      ph_e_date : 結束製成 <br>
@@ -79,10 +80,10 @@ public class ProductionHeader {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "production_header_seq")
 	@SequenceGenerator(name = "production_header_seq", sequenceName = "production_header_seq", allocationSize = 1)
 	@Column(name = "ph_id")
-	private Integer phid;
+	private Long phid;
 
 	@Column(name = "ph_pb_g_id")
-	private Integer phpbgid;
+	private Long phpbgid;
 
 	// @Column(name = "ph_pr_id", nullable = false, columnDefinition =
 	// "varchar(50)")
@@ -92,9 +93,15 @@ public class ProductionHeader {
 
 	@Column(name = "ph_type", columnDefinition = "varchar(50)")
 	private String phtype;
+	
+	@Column(name = "ph_p_number", columnDefinition = "varchar(50)")
+	private String phpnumber;
+	
+	@Column(name = "ph_p_name", columnDefinition = "varchar(50)")
+	private String phpname;
 
 	@Column(name = "ph_wp_id", nullable = false)
-	private Integer phwpid;
+	private Long phwpid;
 
 	@Column(name = "ph_s_date", columnDefinition = "TIMESTAMP")
 	private Date phsdate;
@@ -105,11 +112,19 @@ public class ProductionHeader {
 	@Column(name = "ph_schedule", columnDefinition = "varchar(50)")
 	private String phschedule;
 
-	public Integer getPhpbgid() {
+	public String getPhpnumber() {
+		return phpnumber;
+	}
+
+	public void setPhpnumber(String phpnumber) {
+		this.phpnumber = phpnumber;
+	}
+
+	public Long getPhpbgid() {
 		return phpbgid;
 	}
 
-	public void setPhpbgid(Integer phpbgid) {
+	public void setPhpbgid(Long phpbgid) {
 		this.phpbgid = phpbgid;
 	}
 
@@ -193,11 +208,11 @@ public class ProductionHeader {
 		this.sysheader = sysheader;
 	}
 
-	public Integer getPhid() {
+	public Long getPhid() {
 		return phid;
 	}
 
-	public void setPhid(Integer phid) {
+	public void setPhid(Long phid) {
 		this.phid = phid;
 	}
 	
@@ -210,11 +225,11 @@ public class ProductionHeader {
 		this.productionRecords = productionRecords;
 	}
 
-	public Integer getPhwpid() {
+	public Long getPhwpid() {
 		return phwpid;
 	}
 
-	public void setPhwpid(Integer phwpid) {
+	public void setPhwpid(Long phwpid) {
 		this.phwpid = phwpid;
 	}
 
@@ -240,6 +255,14 @@ public class ProductionHeader {
 
 	public void setPhschedule(String phschedule) {
 		this.phschedule = phschedule;
+	}
+
+	public String getPhpname() {
+		return phpname;
+	}
+
+	public void setPhpname(String phpname) {
+		this.phpname = phpname;
 	}
 
 }

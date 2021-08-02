@@ -37,7 +37,7 @@ public interface WorkHoursDao extends JpaRepository<WorkHours, Long> {
 			+ "order by c.productionRecords asc,c.sysheader desc,c.workType.wtid desc, c.whsdate asc")
 	List<WorkHours> findAllByWorkHours(List<String> prid);
 
-	List<WorkHours> findAllByWhid(Integer id);
+	List<WorkHours> findAllByWhid(Long id);
 
 	// 查詢群
 	List<WorkHours> findAllByproductionRecords(ProductionRecords wh_pr_id);
@@ -46,7 +46,7 @@ public interface WorkHoursDao extends JpaRepository<WorkHours, Long> {
 	List<WorkHours> findAllByproductionRecordsAndWorkTypeAndSysstatus(ProductionRecords wh_pr_id, WorkType wt_id, Integer sysstatus);
 
 	// 移除
-	Long deleteByWhid(Integer whid);
+	Long deleteByWhid(Long whid);
 
 	// 移除(群組)
 	Long deleteByproductionRecords(ProductionRecords wh_pr_id);

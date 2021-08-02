@@ -16,22 +16,22 @@ public interface SystemGroupDao extends JpaRepository<SystemGroup, Long> {
 	@Query("SELECT c FROM SystemGroup c "
 			+ "WHERE  (c.sggid = :sggid) "
 			+ "order by c.sggid asc, c.systemPermission.syssort asc")
-	List<SystemGroup> findBySggidOrderBySggid(Integer sggid);
+	List<SystemGroup> findBySggidOrderBySggid(Long sggid);
 
 	// 查詢ID
-	List<SystemGroup> findBySgidOrderBySgidAscSyssortAsc(Integer sgid);
+	List<SystemGroup> findBySgidOrderBySgidAscSyssortAsc(Long sgid);
 
 	// 查詢群組名稱
 	@Query("SELECT c FROM SystemGroup c "
 			+ "WHERE  (:sgname is null or c.sgname LIKE %:sgname%) and ( c.sysstatus = :sysstatus ) and ((:sggid) is null or c.sggid in (:sggid)) "
 			+ "order by c.sggid asc, c.sgid asc")
-	List<SystemGroup> findAllBySystemGroup(String sgname, Integer sysstatus, List<Integer> sggid);
+	List<SystemGroup> findAllBySystemGroup(String sgname, Integer sysstatus, List<Long> sggid);
 
 	// 查詢群組[頭]數量
 	List<SystemGroup> findAllBySysheader(boolean sysheader, Pageable p);
 	
 	// 查詢群組[頭]數量不包含 Admin群組
-		List<SystemGroup> findAllBySysheaderAndSgidNot(boolean sysheader,Integer sgid, Pageable p);
+		List<SystemGroup> findAllBySysheaderAndSgidNot(boolean sysheader,Long sgid, Pageable p);
 
 	// 查詢群組分頁
 	List<SystemGroup> findAllByOrderBySggidAscSgidAsc(Pageable p);
@@ -45,9 +45,9 @@ public interface SystemGroupDao extends JpaRepository<SystemGroup, Long> {
 
 	// 取得G_ID
 	@Query(value = "SELECT NEXTVAL('system_group_g_seq')", nativeQuery = true)
-	Integer getSystem_group_g_seq();
+	Long getSystem_group_g_seq();
 
 	// 移除
-	Long deleteBySggid(Integer sggid);
+	Long deleteBySggid(Long sggid);
 
 }

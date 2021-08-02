@@ -27,6 +27,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  *      pr_s_item : 軟體定義{"名稱1":"內容1","名稱2":"內容2"}<br>
  *      pr_s_sn : 產品序號 開始 EX:xxxxxx 01YW12042J044-<br>
  *      pr_e_sn : 產品序號 結束 EX: xxxxxx 01YW12042J050<br>
+ *      pr_s_b_sn : 燒錄序號 開始 EX:xxxxxx 01YW12042J044-<br>
+ *      pr_e_b_sn : 燒錄序號 結束 EX:xxxxxx 01YW12042J044-<br>
  *      pr_w_years : 保固
  * 
  */
@@ -123,6 +125,12 @@ public class ProductionRecords {
 
 	@Column(name = "pr_e_sn", nullable = false, columnDefinition = "varchar(50) default ''")
 	private String presn;
+	
+	@Column(name = "pr_s_b_sn", nullable = false, columnDefinition = "varchar(50) default ''")
+	private String prsbsn;
+
+	@Column(name = "pr_e_b_sn", nullable = false, columnDefinition = "varchar(50) default ''")
+	private String prebsn;	
 
 	@Column(name = "pr_w_years", columnDefinition = "int default 0")
 	private Integer prwyears;
@@ -139,6 +147,38 @@ public class ProductionRecords {
 
 	public void setPrpokquantity(Integer prpokquantity) {
 		this.prpokquantity = prpokquantity;
+	}
+
+	public String getPrsbsn() {
+		return prsbsn;
+	}
+
+	public void setPrsbsn(String prsbsn) {
+		this.prsbsn = prsbsn;
+	}
+
+	public String getPrebsn() {
+		return prebsn;
+	}
+
+	public void setPrebsn(String prebsn) {
+		this.prebsn = prebsn;
+	}
+
+	public ProductionHeader getHeader() {
+		return header;
+	}
+
+	public void setHeader(ProductionHeader header) {
+		this.header = header;
+	}
+
+	public List<WorkHours> getWorkHours() {
+		return workHours;
+	}
+
+	public void setWorkHours(List<WorkHours> workHours) {
+		this.workHours = workHours;
 	}
 
 	public Date getSyscdate() {

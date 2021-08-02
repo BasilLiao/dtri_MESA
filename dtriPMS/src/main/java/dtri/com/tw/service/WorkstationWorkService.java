@@ -114,6 +114,8 @@ public class WorkstationWorkService {
 			// doc
 			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.INP, FFM.Type.TEXT, "", "", FFM.Wri.W_N, "col-md-6", false, n_val, "ph_s_date", "投線日"));
 			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.INP, FFM.Type.TEXT, "", "", FFM.Wri.W_N, "col-md-6", false, n_val, "ph_pr_id", "製令單號"));
+			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.INP, FFM.Type.TEXT, "", "", FFM.Wri.W_N, "col-md-6", false, n_val, "ph_p_number", "Part No. "));
+			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.INP, FFM.Type.TEXT, "", "", FFM.Wri.W_N, "col-md-6", false, n_val, "pr_p_name", "產品名(號)"));
 			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.INP, FFM.Type.TEXT, "", "", FFM.Wri.W_N, "col-md-6", false, n_val, "pr_p_model", "產品型號"));
 			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.INP, FFM.Type.TEXT, "", "", FFM.Wri.W_N, "col-md-6", false, n_val, "pr_bom_id", "BOM料號"));
 			obj_m.put(FFS.h_m(FFM.Dno.D_S, FFM.Tag.INP, FFM.Type.TEXT, "", "", FFM.Wri.W_N, "col-md-6", false, n_val, "pr_order_id", "訂單編號"));
@@ -191,7 +193,7 @@ public class WorkstationWorkService {
 
 				// 檢查所有可能對應的欄位
 				Iterator<String> keys = one.keys();
-				ProductionBody body_title = pbDao.findAllByPbid(0).get(0);
+				ProductionBody body_title = pbDao.findAllByPbid(0l).get(0);
 				ProductionBody body_one = pb_all.get(0);
 				while (keys.hasNext()) {
 					String cell_key = keys.next();
@@ -249,8 +251,8 @@ public class WorkstationWorkService {
 				// 比對-檢查程序+工作站
 				wp_all = wkpDao.findAllByWpgidAndWpwgidAndSysheaderOrderBySyssortAsc(ph_all.get(0).getPhwpid(), w_one.get(0).getWgid(), false);
 				if (wp_all.size() == 1) {
-					// 比對-檢查SN關聯
-					pb_all = pbDao.findAllByPbsnAndPbgid(pb_sn, ph_all.get(0).getPhpbgid());
+					// 比對-檢查 燒錄 SN關聯
+					pb_all = pbDao.findAllByPbbsnAndPbgid(pb_sn, ph_all.get(0).getPhpbgid());
 					if (pb_all.size() == 1) {
 
 						// 放入包裝(body) [01 是排序][_b__ 是分割直][資料庫欄位名稱]
@@ -264,6 +266,8 @@ public class WorkstationWorkService {
 							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "ph_s_date",
 									one.getPhsdate() == null ? "" : Fm_Time.to_yMd_Hms(one.getPhsdate()));
 							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "ph_pr_id", one.getProductionRecords().getPrid());
+							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "ph_p_number", one.getPhpnumber());
+							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "pr_p_name", one.getPhpname());
 							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "pr_p_model", one.getProductionRecords().getPrpmodel());
 							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "pr_bom_id", one.getProductionRecords().getPrbomid());
 							object_body.put(FFM.choose(FFM.Hmb.M.toString()) + "pr_order_id", one.getProductionRecords().getProrderid());
@@ -396,7 +400,7 @@ public class WorkstationWorkService {
 
 			// Step0.查詢SN關聯
 			if (list.get("pb_sn") != "") {
-				List<ProductionBody> body_s = pbDao.findAllByPbsn(list.getString("pb_sn"));
+				List<ProductionBody> body_s = pbDao.findAllByPbbsn(list.getString("pb_sn"));
 				if (body_s.size() == 1) {
 					// Step1.更新[ProductionBody]
 					ProductionBody body_one = body_s.get(0);

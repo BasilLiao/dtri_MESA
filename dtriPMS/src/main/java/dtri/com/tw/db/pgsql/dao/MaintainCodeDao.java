@@ -37,15 +37,15 @@ public interface MaintainCodeDao extends JpaRepository<MaintainCode, Long> {
 
 	// 取得最新G_ID
 	@Query(value = "SELECT NEXTVAL('maintain_code_g_seq')", nativeQuery = true)
-	Integer getMaintain_code_g_seq();
+	Long getMaintain_code_g_seq();
 
 	// 取得ID
 	@Query(value = "SELECT CURRVAL('maintain_code_seq')", nativeQuery = true)
-	Integer getMaintain_code_seq();
+	Long getMaintain_code_seq();
 
 	// delete
-	Long deleteByMcidAndSysheader(Integer id, Boolean sysheader);
+	Long deleteByMcidAndSysheader(Long id, Boolean sysheader);
 
 	// delete 群組一除
-	Long deleteByMcgid(Integer id);
+	Long deleteByMcgid(Long id);
 }

@@ -15,9 +15,9 @@ public interface WorkstationDao extends JpaRepository<Workstation, Long> {
 	ArrayList<Workstation> findAll();
 
 	// 查詢全部 指定工作站代表
-	ArrayList<Workstation> findAllByWgidAndSysheaderOrderBySyssortAsc(Integer wgid, Boolean sysheader);
+	ArrayList<Workstation> findAllByWgidAndSysheaderOrderBySyssortAsc(Long wgid, Boolean sysheader);
 
-	ArrayList<Workstation> findAllByWgidOrderBySyssortAsc(Integer wgid);
+	ArrayList<Workstation> findAllByWgidOrderBySyssortAsc(Long wgid);
 
 	// 查詢工作站代表
 	ArrayList<Workstation> findAllBySysheader(Boolean sysheader, Pageable pageable);
@@ -46,15 +46,15 @@ public interface WorkstationDao extends JpaRepository<Workstation, Long> {
 
 	// 取得最新G_ID
 	@Query(value = "SELECT NEXTVAL('workstation_g_seq')", nativeQuery = true)
-	Integer getProduction_workstation_g_seq();
+	Long getProduction_workstation_g_seq();
 
 	// 取得ID
 	@Query(value = "SELECT CURRVAL('workstation_seq')", nativeQuery = true)
-	Integer getProduction_workstation_seq();
+	Long getProduction_workstation_seq();
 
 	// delete
-	Long deleteByWidAndSysheader(Integer id, Boolean sysheader);
+	Long deleteByWidAndSysheader(Long id, Boolean sysheader);
 
 	// delete 群組移除
-	Long deleteByWgid(Integer wgid);
+	Long deleteByWgid(Long wgid);
 }

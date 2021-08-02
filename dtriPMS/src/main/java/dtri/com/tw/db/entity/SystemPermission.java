@@ -41,7 +41,7 @@ public class SystemPermission {
 		this.sysstatus = 0;
 		this.sysheader = false;
 	}
-	public SystemPermission(Integer spid) {
+	public SystemPermission(Long spid) {
 		this.syscdate = new Date();
 		this.syscuser = "system";
 		this.sysmdate = new Date();
@@ -86,13 +86,13 @@ public class SystemPermission {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "system_permission_seq")
 	@SequenceGenerator(name = "system_permission_seq", sequenceName = "system_permission_seq",allocationSize =1)
 	@Column(name = "sp_id")
-	private Integer spid;
+	private Long spid;
 
 	@Column(name = "sp_name", nullable = false, columnDefinition = "varchar(50)")
 	private String spname;
 
 	@Column(name = "sp_g_id", nullable = false)
-	private Integer spgid;
+	private Long spgid;
 
 	@Column(name = "sp_g_name", nullable = false, columnDefinition = "varchar(50)")
 	private String spgname;
@@ -182,11 +182,11 @@ public class SystemPermission {
 		this.sysstatus = sysstatus;
 	}
 
-	public Integer getSpid() {
+	public Long getSpid() {
 		return spid;
 	}
 
-	public void setSpid(Integer spid) {
+	public void setSpid(Long spid) {
 		this.spid = spid;
 	}
 
@@ -198,11 +198,11 @@ public class SystemPermission {
 		this.spname = spname;
 	}
 
-	public Integer getSpgid() {
+	public Long getSpgid() {
 		return spgid;
 	}
 
-	public void setSpgid(Integer spgid) {
+	public void setSpgid(Long spgid) {
 		this.spgid = spgid;
 	}
 

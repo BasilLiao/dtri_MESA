@@ -14,7 +14,7 @@ import dtri.com.tw.db.entity.SystemPermission;
 public interface SystemPermissionDao extends JpaRepository<SystemPermission, Long> {
 
 	// 查詢群組權限
-	ArrayList<SystemPermission> findBySpgid(Integer spgid);
+	ArrayList<SystemPermission> findBySpgid(Long spgid);
 
 	// 查詢全部
 	ArrayList<SystemPermission> findAllByOrderBySpgidAscSpidAsc(Pageable pageable);
@@ -36,8 +36,8 @@ public interface SystemPermissionDao extends JpaRepository<SystemPermission, Lon
 
 	// 取得G_ID
 	@Query(value = "SELECT NEXTVAL('system_permission_g_seq')", nativeQuery = true)
-	Integer getSystem_config_g_seq();
+	Long getSystem_config_g_seq();
 	
 	//delete
-	Long deleteBySpidAndSysheader(Integer id, Boolean sysheader);
+	Long deleteBySpidAndSysheader(Long id, Boolean sysheader);
 }

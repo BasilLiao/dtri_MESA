@@ -77,7 +77,7 @@ public class SystemUserService {
 					groups.put((new JSONObject()).put("value", s.getSgname()).put("key", s.getSggid()));
 				});
 			} else {
-				groupDao.findAllBySysheaderAndSgidNot(true, 1, PageRequest.of(0, 999)).forEach(s -> {
+				groupDao.findAllBySysheaderAndSgidNot(true, 1l, PageRequest.of(0, 999)).forEach(s -> {
 					groups.put((new JSONObject()).put("value", s.getSgname()).put("key", s.getSggid()));
 				});
 			}
@@ -183,7 +183,7 @@ public class SystemUserService {
 				// 物件轉換
 				SystemUser sys_c = new SystemUser();
 				JSONObject data = (JSONObject) one;
-				sys_c.setSusggid(data.getInt("su_sg_g_id"));
+				sys_c.setSusggid(data.getLong("su_sg_g_id"));
 				sys_c.setSuname(data.getString("su_name"));
 				sys_c.setSuename(data.getString("su_e_name"));
 				sys_c.setSuposition(data.getString("su_position"));
@@ -227,7 +227,7 @@ public class SystemUserService {
 				// 物件轉換
 				SystemUser sys_c = new SystemUser();
 				JSONObject data = (JSONObject) one;
-				sys_c.setSusggid(data.getInt("su_sg_g_id"));
+				sys_c.setSusggid(data.getLong("su_sg_g_id"));
 				sys_c.setSuname(data.getString("su_name"));
 				sys_c.setSuename(data.getString("su_e_name"));
 				sys_c.setSuposition(data.getString("su_position"));
@@ -271,9 +271,9 @@ public class SystemUserService {
 			for (Object one : list) {
 				// 物件轉換
 				JSONObject data = (JSONObject) one;
-				SystemUser sys_c = userDao.findAllBySuid(data.getInt("su_id")).get(0);
+				SystemUser sys_c = userDao.findAllBySuid(data.getLong("su_id")).get(0);
 				// sys_c.setSuid(data.getInt("su_id"));
-				sys_c.setSusggid(data.getInt("su_sg_g_id"));
+				sys_c.setSusggid(data.getLong("su_sg_g_id"));
 				sys_c.setSuname(data.getString("su_name"));
 				sys_c.setSuename(data.getString("su_e_name"));
 				sys_c.setSuposition(data.getString("su_position"));
@@ -311,7 +311,7 @@ public class SystemUserService {
 				// 物件轉換
 				SystemUser sys_p = new SystemUser();
 				JSONObject data = (JSONObject) one;
-				sys_p.setSuid(data.getInt("su_id"));
+				sys_p.setSuid(data.getLong("su_id"));
 				// 不得刪除自己
 				if (!data.getString("su_account").equals(user.getSuaccount())) {
 					if (userDao.deleteBySuid(sys_p.getSuid()) > 0) {

@@ -118,10 +118,10 @@ public class SystemUser {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "system_user_seq") 
     @SequenceGenerator(name = "system_user_seq", sequenceName = "system_user_seq",allocationSize =1) 
 	@Column(name = "su_id")
-	private Integer suid;
+	private Long suid;
 
 	@Column(name = "su_sg_g_id")
-	private Integer susggid;
+	private Long susggid;
 
 	@Column(name = "su_name", nullable = false, columnDefinition = "varchar(50)")
 	private String suname;
@@ -213,19 +213,19 @@ public class SystemUser {
 		this.syssort = syssort;
 	}
 
-	public Integer getSuid() {
+	public Long getSuid() {
 		return suid;
 	}
 
-	public void setSuid(Integer suid) {
+	public void setSuid(Long suid) {
 		this.suid = suid;
 	}
 
-	public Integer getSusggid() {
+	public Long getSusggid() {
 		return susggid;
 	}
 
-	public void setSusggid(Integer susggid) {
+	public void setSusggid(Long susggid) {
 		this.susggid = susggid;
 	}
 

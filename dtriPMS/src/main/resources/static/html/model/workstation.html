@@ -330,7 +330,7 @@
 					<tr id="barcode_sn" class="w_i_5 font-weight-bold">
 						<td colspan="2" class="p-0">
 							<div class=" row p-1 m-0 border border-light rounded">
-								<div class="col-3 p-1 m-0 b_code_w">*產品身分序號:</div>
+								<div class="col-3 p-1 m-0 b_code_w">*產品/燒錄 序號:</div>
 								<div class="col-9 p-0">
 									<input title="pb_sn" id="w_focus_5" disabled="disabled" class="w_sn_value col p-1 border-0 border-primary rounded" type="text" required>
 								</div>
@@ -384,7 +384,7 @@
 							<div class=" row p-1 m-0 border border-light rounded">
 								<div class="col-3 p-0 row m-0 b_code_w">
 									<input class="ml-1 mt-2 p-1 border border-dark rounded big-checkbox w_sn_check" id="" name="" value="true" type="checkbox">
-									<div class=" m-0 p-1 w_sn_name">Loading...</div>
+									<div class=" m-0 p-1 w_sn_name" contenteditable="true">Loading...</div>
 								</div>
 								<div class="col-9 p-0">
 									<input id="" class="w_sn_value col p-1 border-0 border-primary rounded" disabled="disabled" type="text" required>
@@ -432,14 +432,20 @@
 									<i class="bi bi-upc-scan mr-1"></i> Print Barcode (Auto)
 								</div>
 								<div class="row m-0">
-									<!-- SN 單一標籤 -->
-									<div class="p-1 m-1 border border-dark" style="width: 240px;">
+									<!-- SN 3X1 單一標籤 -->
+									<div class="p-1 m-1 border border-dark" style="width: 260px;">
 										<div class="p-1 m-0">
 											<div class="row m-0 pl-1 h5">
-												<div class="col-2 m-0 p-0">
+												<div class="m-0 mr-1 p-0">
 													<input id="sn_one_check" name="" value="true" type="checkbox" class=" mt-1 border border-dark rounded big-checkbox">
 												</div>
-												<div class="col-10 m-0 p-0">SN條碼</div>
+												<div class="col-10 m-0 p-0">3X1 SN 標籤(自動)</div>
+											</div>
+											<div class="row m-0 pl-1 h5">
+												<div class="m-0 mr-1 p-0">
+													<input id="ph_p_number" name="" value="true" type="checkbox" class=" mt-1 border border-dark rounded big-checkbox">
+												</div>
+												<div class="col-10 m-0 p-0">Part No.</div>
 											</div>
 										</div>
 										<div class="p-1 m-0 mb-2 row bg-light">
@@ -448,9 +454,50 @@
 												<input id="barcode_sn_one_nb" type="number" class="col p-0 rounded" value="1">
 											</div>
 										</div>
-										<div id="barcode_sn_print" class="m-0 p-1 pl-2 border border-white" style="width: 225px;height: 55px">
-											<div id="barcode_sn_one"></div>
-											<div id="barcode_sn_name" class="font-weight-bold text-center">S/N:</div>
+										<hr>
+										<div id="barcode_sn_print" class="m-0 p-1 border border-white">
+											<div id="barcode_p_number" class="text-center small font-weight-bold" style="min-height: 20px;"></div>
+											<div class="d-flex justify-content-center m-0 p-0">
+												<div id="barcode_sn_one"></div>
+											</div>
+											<div id="barcode_sn_name" class="text-center font-weight-bold" style="min-height: 20px;">S/N:</div>
+										</div>
+									</div>
+									<!-- SN 3X2 單一標籤 -->
+									<div class="p-1 m-1 border border-dark" style="width: 260px;">
+										<div class="p-1 m-0">
+											<div class="row m-0 pl-1 h5">
+												<div class="m-0 mr-1 p-0">
+													<input id="sn_double_check" name="" value="true" type="checkbox" class=" mt-1 border border-dark rounded big-checkbox">
+												</div>
+												<div class="col-10 m-0 p-0">3X2 SN 標籤(自動)</div>
+											</div>
+											<div class="row m-0 pl-1 h5">
+												<div class="m-0 mr-1 p-0">
+													<input id="ph_p_double_number" name="" value="true" type="checkbox" class=" mt-1 border border-dark rounded big-checkbox">
+												</div>
+												<div class="col-10 m-0 p-0">Part No.</div>
+											</div>
+										</div>
+										<div class="p-1 m-0 mb-2 row bg-light">
+											<div class="col-8 m-0 p-1">(Print quantity)</div>
+											<div class="col-4 m-0 p-1">
+												<input id="barcode_sn_double_nb" type="number" class="col p-0 rounded" value="1">
+											</div>
+										</div>
+										<hr>
+										<div id="barcode_sn_double_print" class="m-0 p-1 border border-white">
+											<div id="barcode_p_double_number" class="text-center small font-weight-bold" style="min-height: 20px;"></div>
+											<div class="d-flex justify-content-center m-0 p-0">
+												<div id="barcode_sn_double"></div>
+											</div>
+											<div id="barcode_sn_double_name" class="text-center font-weight-bold" style="min-height: 20px;">S/N:</div>
+											<!-- 附加條碼 -->
+											<div id="" class="text-center small font-weight-bold" style="min-height: 20px;"></div>
+											<div class="d-flex justify-content-center m-0 p-0">
+												<div id="barcode_sn_double2"></div>
+											</div>
+											<div id="barcode_sn_double_name2" class="text-center font-weight-bold" style="min-height: 20px;">S/N:</div>
 										</div>
 									</div>
 
@@ -458,10 +505,13 @@
 									<div class="p-1 m-1 border border-dark" style="width: 310px;">
 										<div class="p-1 m-0">
 											<div class=" bg-white rounded-top m-0 p-1 h5 row">
-												<div class="col-2 m-0 p-0">
+												<div class="m-0 mr-1 p-0">
 													<input id="sn_cumulative_check" name="" value="true" type="checkbox" class=" mt-1 border border-dark rounded big-checkbox">
 												</div>
-												<div class="col-6 m-0 p-0">包裝條碼累計</div>
+												<div class="col-10 m-0 p-0">6X10 外包裝標籤(自動)</div>
+											</div>
+											<div class=" bg-white rounded-top m-0 p-1 h5 row">
+												<div class="col-8 m-0 p-0">累計 SN 序號</div>
 												<div class="col-4 m-0 p-0">
 													<input id="sn_cumulative_number" type="number" class="col m-0 p-0 rounded" value="0" style="min-width: 40px;">
 												</div>
@@ -482,7 +532,8 @@
 												<input id="barcode_sn_all_list_nb" type="number" class="col p-0 rounded" value="1">
 											</div>
 										</div>
-										<div id="barcode_sn_all_list" class="m-0 p-1 border border-secondary font-weight-bold" style="width: 300px; transform: scale(1);">
+										<hr>
+										<div id="barcode_sn_all_list" class="m-0 p-1  font-weight-bold" style="width: 300px; transform: scale(1);">
 											<div class="row m-0">
 												<div>P/N:</div>
 												<div class="ml-2" id="barcode_model_name" contenteditable="true">Product Model Number</div>
@@ -814,23 +865,36 @@
 							var css = '<link rel="stylesheet" href="./css/model/print_code.css" />';
 								css +='<link rel="stylesheet" href="./thirdparty/css/bootstrap-4.6.0.min.css" />';
 							var divToPrint=$('<div>').append($('#barcode_sn_print').clone()).html();
+							var divToPrint_double=$('<div>').append($('#barcode_sn_double_print').clone()).html();
 							var newWin=window.open('','Print-Window');
 							newWin.document.open();
-							//數量
-							
-							var print_one='';
-							for(var d =1 ;d<$('#barcode_sn_one_nb').val();d++ ){
-								print_one += divToPrint+'<p style="page-break-after:always"></p>';
+							//==數量==
+							var print_all='';
+							//3*1
+							if($('#sn_one_check').is(":checked")){
+								for(var d =1 ;d<$('#barcode_sn_one_nb').val();d++ ){
+									print_all += divToPrint+'<p style="page-break-after:always"></p>';
+								}
+								print_all+=divToPrint;
 							}
-							print_one+=divToPrint;
+							//3*2
+							if($('#sn_double_check').is(":checked")){
+								if(print_all!=''){
+									print_all+='<p style="page-break-after:always"></p>';
+								}
+								for(var d =1 ;d<$('#barcode_sn_double_nb').val();d++ ){
+									print_all += divToPrint_double+'<p style="page-break-after:always"></p>';
+								}
+								print_all+=divToPrint_double;
+							}
 							
 							var print_all = '<html><head>'+css+'</head>'+
-							'<body class="row justify-content-center" onload="print()"><div>'+
-							print_one
+							'<body class="row justify-content-center " onload="print()"><div>'+
+							print_all
 							'</div></body></html>';
 							newWin.document.write(print_all);
 							newWin.document.close();
-							setTimeout(function(){newWin.close();},500);
+							//setTimeout(function(){newWin.close();},500);
 							workstation.barcode_save = false;
 							//workstation.barcode_check = false;
 						}
@@ -937,12 +1001,7 @@
 					}
 					//輸入一般值->換下一格
 					$('#'+id).val(code);
-					//是SN欄位則登記
-					if(workstation.nb==5){
-						$('#barcode_sn_name').text("S/N: "+code);
-						workstation.create_barcode("barcode_sn_one",code,"code39",30);
-						
-					}
+					
 					//自動位移
 					if(workstation.nb+1<$(".w_sn_value").length ){
 						//console.log(id);
@@ -1020,7 +1079,10 @@
 					//自動列印
 					if($('#sn_one_check').is(":checked")){
 						$("#BC011" ).trigger( "click" );						
+					}else if($('#sn_double_check').is(":checked")){
+						$("#BC011" ).trigger( "click" );						
 					}
+					
 				}, 500);
 				//Step5.更換Class
 				var id =$(".border-1").attr("id");
@@ -1076,6 +1138,16 @@
 				//更新SN_List
 				var sn_list =  main.allData.body.sn_list;
 				var nb =6;
+				//保存勾選
+				var save_check = [];
+				var save_name = [];
+				for (var i = 0; i < $('.sn_list').length; i++) {
+					if ($('#'+$('.sn_list')[i].id+' .w_sn_check').is(":checked")){
+						save_check.push($('#'+$('.sn_list')[i].id).attr('id'));
+						save_name.push($('#'+$('.sn_list')[i].id+" .w_sn_name").text());
+					}
+				}
+				//移除重製
 				$(".sn_list").remove();
 				 for (var i = 0; i < Object.keys(sn_list).length; i++) {
 					var one_sn = sn_list[Object.keys(sn_list)[i]];
@@ -1090,6 +1162,13 @@
 					$(".w_i_"+(nb+i)+" .w_sn_value").val(value_content);
 					$(".w_i_"+(nb+i)+" .w_sn_value").attr("id","w_focus_"+(nb+i));
 					$(".w_i_"+(nb+i)+" .w_sn_value").attr("title",key);
+					//還原已鎖定
+					for (var s = 0; s < save_check.length; s++) {
+						if(save_check[s]==key){
+							$('#'+key+" .w_sn_check").prop("checked", true);
+							$('#'+key+" .w_sn_name").text(save_name[s]);
+						}
+					}
 				}
 				 
 				 //更新工作站
@@ -1109,8 +1188,39 @@
 				$("#w_focus_"+workstation.nb).addClass("border-1");
 				$("#w_focus_"+workstation.nb).removeClass("border-0");
 				
+				//如果有Part ON. 3*1
+				if($('#ph_p_number').is(":checked") && $("#m__ph_p_number .doc_c_value").val()!=""){
+					var top_lb= $("#m__ph_p_number .doc_c_name").text();
+					top_lb+=$("#m__ph_p_number .doc_c_value").val();
+					$("#barcode_p_number").text(top_lb);
+				}
+				//如果有Part ON. 3*2
+				if($('#ph_p_double_number').is(":checked") && $("#m__ph_p_double_number .doc_c_value").val()!=""){
+					var top_lb= $("#m__ph_p_number .doc_c_name").text();
+					top_lb+=$("#m__ph_p_number .doc_c_value").val();
+					$("#barcode_p_double_number").text(top_lb);
+				}
+				
+				//是SN欄位則登記
+				if($('#w_focus_5').val()!=""){
+					//3*1
+					$('#barcode_sn_name').text("S/N: "+$('#w_focus_5').val());
+					workstation.create_barcode("barcode_sn_one",$('#w_focus_5').val(),"code39",28);
+					//3*2
+					$('#barcode_sn_double_name').text("S/N: "+$('#w_focus_5').val());
+					workstation.create_barcode("barcode_sn_double",$('#w_focus_5').val(),"code39",28);
+					 for (var i = 0; i < $('.sn_list').length; i++) {
+					//sn_list  //有勾選
+						if ($('#'+$('.sn_list')[i].id+' .w_sn_check').is(":checked")){
+							var barcode_sn2 = $('#'+$('.sn_list')[i].id+' .w_sn_name').text()+": ";
+							barcode_sn2+=$('#'+$('.sn_list')[i].id+' .w_sn_value').val();
+							$('#barcode_sn_double_name2').text(barcode_sn2);
+							workstation.create_barcode("barcode_sn_double2",$('#'+$('.sn_list')[i].id+' .w_sn_value').val(),"code39",28);
+							break;
+						}
+					 }
+				}
             },
-            
 		},
 		//移除監聽事件
 		beforeDestroy() {

@@ -31,7 +31,3 @@ html {
 	transform-origin: 50% 0%;
 	transform: scale(1.9);
 }
-#barcode_sn_double_print{
-	transform-origin: 50% -5%;
-	transform: scale(1.9);
-}

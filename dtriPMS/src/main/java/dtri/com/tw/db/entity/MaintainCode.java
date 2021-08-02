@@ -71,10 +71,10 @@ public class MaintainCode {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "maintain_code_seq")
 	@SequenceGenerator(name = "maintain_code_seq", sequenceName = "maintain_code_seq", allocationSize = 1)
 	@Column(name = "mc_id")
-	private Integer mcid;
+	private Long mcid;
 
 	@Column(name = "mc_g_id", nullable = false)
-	private Integer mcgid;
+	private Long mcgid;
 
 	@Column(name = "mc_name", nullable = false, columnDefinition = "varchar(50)")
 	private String mcname;
@@ -157,19 +157,19 @@ public class MaintainCode {
 		this.sysheader = sysheader;
 	}
 
-	public Integer getMcid() {
+	public Long getMcid() {
 		return mcid;
 	}
 
-	public void setMcid(Integer mcid) {
+	public void setMcid(Long mcid) {
 		this.mcid = mcid;
 	}
 
-	public Integer getMcgid() {
+	public Long getMcgid() {
 		return mcgid;
 	}
 
-	public void setMcgid(Integer mcgid) {
+	public void setMcgid(Long mcgid) {
 		this.mcgid = mcgid;
 	}
 

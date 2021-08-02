@@ -24,19 +24,19 @@ public interface WorkstationProgramDao extends JpaRepository<WorkstationProgram,
 	ArrayList<WorkstationProgram> findAllByWpnameAndWpnameNot(String wp_name, String wp_name2);
 
 	// 查詢全部 By Group
-	ArrayList<WorkstationProgram> findAllByWpgidOrderBySyssortAsc(Integer wp_g_id);
+	ArrayList<WorkstationProgram> findAllByWpgidOrderBySyssortAsc(Long wp_g_id);
 
 	// 查詢全部 By Group 排除代表
-	ArrayList<WorkstationProgram> findAllByWpgidAndSysheaderOrderBySyssortAsc(Integer wp_g_id, Boolean sysheader);
+	ArrayList<WorkstationProgram> findAllByWpgidAndSysheaderOrderBySyssortAsc(Long wp_g_id, Boolean sysheader);
 
 	// 查詢全部 By Group + 特定工作站
-	ArrayList<WorkstationProgram> findAllByWpgidAndWpwgidAndSysheaderOrderBySyssortAsc(Integer wp_g_id, Integer wp_w_g_id, Boolean sysheader);
+	ArrayList<WorkstationProgram> findAllByWpgidAndWpwgidAndSysheaderOrderBySyssortAsc(Long wp_g_id, Long wp_w_g_id, Boolean sysheader);
 
 	// 查詢全部 By Group 代表
 	ArrayList<WorkstationProgram> findAllBySysheader(Boolean sysheader);
 
 	// 查詢全部 By wp_w_g_id 關聯工作站
-	ArrayList<WorkstationProgram> findAllByWpwgid(Integer Wpwgid);
+	ArrayList<WorkstationProgram> findAllByWpwgid(Long Wpwgid);
 
 	// 查詢一部分
 	@Query("SELECT c FROM WorkstationProgram c "
@@ -47,15 +47,15 @@ public interface WorkstationProgramDao extends JpaRepository<WorkstationProgram,
 
 	// 取得G_ID WORKSTATION_PROGRAM_G_SEQ
 	@Query(value = "SELECT NEXTVAL('workstation_program_g_seq')", nativeQuery = true)
-	Integer getWorkstation_program_g_seq();
+	Long getWorkstation_program_g_seq();
 
 	// 取得ID
 	@Query(value = "SELECT CURRVAL('workstation_program_seq')", nativeQuery = true)
-	Integer getWorkstation_program_seq();
+	Long getWorkstation_program_seq();
 
 	// delete
-	Long deleteByWpidAndSysheader(Integer id, Boolean sysheader);
+	Long deleteByWpidAndSysheader(Long id, Boolean sysheader);
 
 	// delete group
-	Long deleteByWpgid(Integer id);
+	Long deleteByWpgid(Long id);
 }

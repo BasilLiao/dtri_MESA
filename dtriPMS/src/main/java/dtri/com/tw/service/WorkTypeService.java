@@ -176,7 +176,7 @@ public class WorkTypeService {
 				// 物件轉換
 				WorkType sys_p = new WorkType();
 				JSONObject data = (JSONObject) one;
-				sys_p.setWtid(data.getInt("wt_id"));
+				sys_p.setWtid(data.getLong("wt_id"));
 				sys_p.setWtname(data.getString("wt_name"));
 				sys_p.setSysnote(data.has("sys_note") ? data.getString("sys_note") : "");
 				sys_p.setSyssort(data.getInt("sys_sort"));
@@ -208,7 +208,7 @@ public class WorkTypeService {
 				// 物件轉換
 				WorkType sys_p = new WorkType();
 				JSONObject data = (JSONObject) one;
-				sys_p.setWtid(data.getInt("wt_id"));
+				sys_p.setWtid(data.getLong("wt_id"));
 				workDao.deleteByWtid(sys_p.getWtid());
 				check = true;
 			}

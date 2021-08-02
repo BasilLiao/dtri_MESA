@@ -24,5 +24,5 @@ public interface WorkstationItemDao extends JpaRepository<WorkstationItem, Long>
 	ArrayList<WorkstationItem> findAllBySysheader(Boolean sysheader);
 
 	// delete
-	Long deleteByWiidAndSysheader(Integer id, Boolean sysheader);
+	Long deleteByWiidAndSysheader(Long id, Boolean sysheader);
 }

@@ -70,7 +70,7 @@ public class WorkType {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "work_type_seq")
 	@SequenceGenerator(name = "work_type_seq", sequenceName = "work_type_seq", allocationSize = 1)
 	@Column(name = "wt_id")
-	private Integer wtid;
+	private Long wtid;
 
 	@Column(name = "wt_name", nullable = false, columnDefinition = "varchar(50)")
 	private String wtname;
@@ -150,11 +150,11 @@ public class WorkType {
 		this.sysheader = sysheader;
 	}
 
-	public Integer getWtid() {
+	public Long getWtid() {
 		return wtid;
 	}
 
-	public void setWtid(Integer wtid) {
+	public void setWtid(Long wtid) {
 		this.wtid = wtid;
 	}
 

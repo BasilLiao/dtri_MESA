@@ -151,7 +151,7 @@ public class MaintainCodeService {
 		try {
 			JSONArray list = body.getJSONArray("create");
 			String mc_g_name = "";
-			int mc_g_id = 0;
+			Long mc_g_id = 0l;
 			for (Object one : list) {
 				// 物件轉換
 				MaintainCode sys_c = new MaintainCode();
@@ -209,13 +209,13 @@ public class MaintainCodeService {
 		try {
 			JSONArray list = body.getJSONArray("save_as");
 			String mc_g_name = "";
-			int mc_g_id = 0;
+			Long mc_g_id = 0l;
 			List<MaintainCode> sys_c_s = new ArrayList<MaintainCode>();
 			for (Object one : list) {
 				// 物件轉換
 				MaintainCode sys_c = new MaintainCode();
 				JSONObject data = (JSONObject) one;
-				sys_c.setMcgid(data.getInt("mc_g_id"));
+				sys_c.setMcgid(data.getLong("mc_g_id"));
 				sys_c.setMcgname(data.getString("mc_g_name"));
 				// 檢查代碼重複/名稱?
 				if (mcDao.findAllByMcvalue(data.getString("mc_value")).size() > 0) {
@@ -280,8 +280,8 @@ public class MaintainCodeService {
 				if (data.getBoolean("sys_header")) {
 					// 父類別
 					mc_g_name = data.getString("mc_g_name");
-					sys_p.setMcid(data.getInt("mc_id"));
-					sys_p.setMcgid(data.getInt("mc_g_id"));
+					sys_p.setMcid(data.getLong("mc_id"));
+					sys_p.setMcgid(data.getLong("mc_g_id"));
 					sys_p.setMcname("");
 					sys_p.setMcgname(mc_g_name);
 					sys_p.setMcvalue(data.getString("mc_value"));
@@ -295,8 +295,8 @@ public class MaintainCodeService {
 					// mcDao.save(sys_p);
 				} else {
 					// 子
-					sys_p.setMcid(data.getInt("mc_id"));
-					sys_p.setMcgid(data.getInt("mc_g_id"));
+					sys_p.setMcid(data.getLong("mc_id"));
+					sys_p.setMcgid(data.getLong("mc_g_id"));
 					sys_p.setMcname(data.getString("mc_name"));
 					sys_p.setMcgname(mc_g_name);
 					sys_p.setMcvalue(data.getString("mc_value"));
@@ -335,10 +335,10 @@ public class MaintainCodeService {
 				JSONObject data = (JSONObject) one;
 				// 父類別除外
 				if (data.getBoolean("sys_header")) {
-					sys_p.setMcgid(data.getInt("mc_g_id"));
+					sys_p.setMcgid(data.getLong("mc_g_id"));
 					mcDao.deleteByMcgid(sys_p.getMcgid());
 				} else {
-					sys_p.setMcid(data.getInt("mc_id"));
+					sys_p.setMcid(data.getLong("mc_id"));
 					mcDao.deleteByMcidAndSysheader(sys_p.getMcid(), false);
 				}
 				check = true;

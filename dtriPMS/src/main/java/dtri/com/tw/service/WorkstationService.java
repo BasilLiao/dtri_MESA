@@ -103,7 +103,7 @@ public class WorkstationService {
 			a_val = new JSONArray();
 			int j = 0;
 			Method method;
-			ProductionBody body_one = bodyDao.findAllByPbid(0).get(0);
+			ProductionBody body_one = bodyDao.findAllByPbid(0l).get(0);
 			for (j = 0; j < 20; j++) {
 				String m_name = "getPbwname" + String.format("%02d", j + 1);
 				try {
@@ -238,8 +238,8 @@ public class WorkstationService {
 				if (data.getBoolean("sys_header")) {
 					// 使用者群組
 					List<SystemGroup> systemGroup = new ArrayList<SystemGroup>();
-					systemGroup = groupDao.findBySggidOrderBySggid(data.getInt("w_sg_id"));
-					ProductionBody body_one = bodyDao.findAllByPbid(0).get(0);
+					systemGroup = groupDao.findBySggidOrderBySggid(data.getLong("w_sg_id"));
+					ProductionBody body_one = bodyDao.findAllByPbid(0l).get(0);
 					// 取得工作欄位 位置
 					String w_pb_name = data.getString("w_pb_cell").replace("pb_w_name", "getPbwname");
 					try {
@@ -248,7 +248,7 @@ public class WorkstationService {
 						String w_pb_cell = data.getString("w_pb_cell");
 
 						WorkstationItem sys_ti_f = new WorkstationItem();
-						sys_ti_f.setWiid(0);
+						sys_ti_f.setWiid(0l);
 						sys_t_f = new Workstation();
 						sys_t_f.setWgid(workstationDao.getProduction_workstation_g_seq());
 						sys_t_f.setWorkstationItem(sys_ti_f);
@@ -281,11 +281,11 @@ public class WorkstationService {
 				} else {
 					// 如果為子目錄 非群組
 					if (!sys_t_f.getSysheader()) {
-						sys_t_f = workstationDao.findAllByWgidAndSysheaderOrderBySyssortAsc(data.getInt("w_g_id"), true).get(0);
+						sys_t_f = workstationDao.findAllByWgidAndSysheaderOrderBySyssortAsc(data.getLong("w_g_id"), true).get(0);
 					}
 					// 子類別
 					WorkstationItem sys_ti = new WorkstationItem();
-					sys_ti.setWiid(data.getInt("w_i_id"));
+					sys_ti.setWiid(data.getLong("w_i_id"));
 					sys_t = new Workstation();
 					sys_t.setWgid(sys_t_f.getWgid());
 					sys_t.setWcname(sys_t_f.getWcname());
@@ -340,8 +340,8 @@ public class WorkstationService {
 				if (data.getBoolean("sys_header")) {
 					// 使用者群組
 					List<SystemGroup> systemGroup = new ArrayList<SystemGroup>();
-					systemGroup = groupDao.findBySggidOrderBySggid(data.getInt("w_sg_id"));
-					ProductionBody body_one = bodyDao.findAllByPbid(0).get(0);
+					systemGroup = groupDao.findBySggidOrderBySggid(data.getLong("w_sg_id"));
+					ProductionBody body_one = bodyDao.findAllByPbid(0l).get(0);
 					// 取得工作欄位 位置
 					String w_pb_name = data.getString("w_pb_cell").replace("pb_w_name", "getPbwname");
 					try {
@@ -350,7 +350,7 @@ public class WorkstationService {
 						String w_pb_cell = data.getString("w_pb_cell");
 
 						WorkstationItem sys_ti_f = new WorkstationItem();
-						sys_ti_f.setWiid(0);
+						sys_ti_f.setWiid(0l);
 						sys_t_f = new Workstation();
 						sys_t_f.setWgid(workstationDao.getProduction_workstation_g_seq());
 						sys_t_f.setWorkstationItem(sys_ti_f);
@@ -383,7 +383,7 @@ public class WorkstationService {
 				} else {
 					// 子類別
 					WorkstationItem sys_ti = new WorkstationItem();
-					sys_ti.setWiid(data.getInt("w_i_id"));
+					sys_ti.setWiid(data.getLong("w_i_id"));
 					sys_t = new Workstation();
 					sys_t.setWgid(sys_t_f.getWgid());
 					sys_t.setWcname(sys_t_f.getWcname());
@@ -425,13 +425,13 @@ public class WorkstationService {
 			// 物件轉換
 			for (Object one : list) {
 				JSONObject data = (JSONObject) one;
-				sys_t.setWid(data.getInt("w_id"));
+				sys_t.setWid(data.getLong("w_id"));
 
 				// 父類別
 				if (data.getBoolean("sys_header")) {
 					// 使用者群組
-					systemGroup = groupDao.findBySggidOrderBySggid(data.getInt("w_sg_id"));
-					ProductionBody body_one = bodyDao.findAllByPbid(0).get(0);
+					systemGroup = groupDao.findBySggidOrderBySggid(data.getLong("w_sg_id"));
+					ProductionBody body_one = bodyDao.findAllByPbid(0l).get(0);
 					// 取得工作欄位 位置
 					String w_pb_name = data.getString("w_pb_cell").replace("pb_w_name", "getPbwname");
 					try {
@@ -464,9 +464,9 @@ public class WorkstationService {
 						return false;
 					}
 					WorkstationItem sys_ti_f = new WorkstationItem();
-					sys_ti_f.setWiid(0);
+					sys_ti_f.setWiid(0l);
 					sys_t.setWorkstationItem(sys_ti_f);
-					sys_t.setWgid(data.getInt("w_g_id"));
+					sys_t.setWgid(data.getLong("w_g_id"));
 					sys_t.setWcname(data.getString("w_c_name"));
 					sys_t.setWpbcell(data.getString("w_pb_cell"));
 					sys_t.setWpbname(w_pb_value);
@@ -481,7 +481,7 @@ public class WorkstationService {
 					workstationDao.save(sys_t);
 
 					// 更新每一筆資料
-					ArrayList<Workstation> workstations = workstationDao.findAllByWgidOrderBySyssortAsc(data.getInt("w_g_id"));
+					ArrayList<Workstation> workstations = workstationDao.findAllByWgidOrderBySyssortAsc(data.getLong("w_g_id"));
 					for (Workstation w : workstations) {
 						w.setWcname(data.getString("w_c_name"));
 						w.setWpbname(w_pb_value);
@@ -496,7 +496,7 @@ public class WorkstationService {
 				} else {
 					// 子類別
 					WorkstationItem sys_ti = new WorkstationItem();
-					sys_ti.setWiid(data.getInt("w_i_id"));
+					sys_ti.setWiid(data.getLong("w_i_id"));
 					sys_t.setWcname(wc_name);
 					sys_t.setWorkstationItem(sys_ti);
 					sys_t.setSysheader(false);
@@ -535,10 +535,10 @@ public class WorkstationService {
 				JSONObject data = (JSONObject) one;
 				// 群組?
 				// 如果程序正在使用-不能移除
-				sys_t.setWid(data.getInt("w_id"));
-				sys_t.setWgid(data.getInt("w_g_id"));
+				sys_t.setWid(data.getLong("w_id"));
+				sys_t.setWgid(data.getLong("w_g_id"));
 				if (data.getBoolean("sys_header")) {
-					if (workpDao.findAllByWpwgid(data.getInt("w_g_id")).size() > 0) {
+					if (workpDao.findAllByWpwgid(data.getLong("w_g_id")).size() > 0) {
 						return false;
 					}
 					workstationDao.deleteByWgid(sys_t.getWgid());

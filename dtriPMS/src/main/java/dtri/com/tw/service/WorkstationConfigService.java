@@ -59,7 +59,7 @@ public class WorkstationConfigService {
 			JSONArray a_val = new JSONArray();
 
 			JSONArray a_val_body = new JSONArray();
-			ProductionBody body_one = bodyDao.findAllByPbid(0).get(0);
+			ProductionBody body_one = bodyDao.findAllByPbid(0l).get(0);
 			// sn關聯表
 			int j = 0;
 			Method method;
@@ -112,7 +112,7 @@ public class WorkstationConfigService {
 			pb_value = body.getJSONObject("search").getString("pb_value");
 			pb_value = pb_value.equals("") ? null : pb_value;
 		}
-		productionBodys = bodyDao.findAllByPbid(0);
+		productionBodys = bodyDao.findAllByPbid(0l);
 
 		// 放入包裝(body) [01 是排序][_b__ 是分割直][資料庫欄位名稱]
 		JSONArray object_bodys = new JSONArray();
@@ -199,7 +199,7 @@ public class WorkstationConfigService {
 			JSONArray list = body.getJSONArray("modify");
 			for (Object one : list) {
 				// 物件轉換
-				ProductionBody p_body = bodyDao.findAllByPbid(0).get(0);
+				ProductionBody p_body = bodyDao.findAllByPbid(0l).get(0);
 				JSONObject data = (JSONObject) one;
 				// SN類別
 

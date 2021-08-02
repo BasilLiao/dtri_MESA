@@ -22,5 +22,5 @@ public interface WorkTypeDao extends JpaRepository<WorkType, Long> {
 			Pageable pageable);
 
 	// delete
-	Long deleteByWtid(Integer id);
+	Long deleteByWtid(Long id);
 }

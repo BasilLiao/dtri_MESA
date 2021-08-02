@@ -18,7 +18,7 @@ public interface ProductionHeaderDao extends JpaRepository<ProductionHeader, Lon
 	List<ProductionHeader> findAll();
 
 	// 查詢最新一筆的製令單關聯
-	ProductionHeader findTopByPhpbgidOrderBySysmdateDesc(Integer phpbgid);
+	ProductionHeader findTopByPhpbgidOrderBySysmdateDesc(Long phpbgid);
 
 //
 //	// 查詢一部分_Header+Body
@@ -46,13 +46,13 @@ public interface ProductionHeaderDao extends JpaRepository<ProductionHeader, Lon
 			+ "(h.phid != 0) "//
 			+ " order by h.sysmdate desc ")
 	List<ProductionHeader> findAllByProductionHeader(@Param("prpmodel") String prpmodel, @Param("phprid") String phprid,
-			@Param("sysstatus") Integer sysstatus, @Param("phpbgid") List<Integer> phpbgid, @Param("prorderid") String pr_order_id,
+			@Param("sysstatus") Integer sysstatus, @Param("phpbgid") List<Long> phpbgid, @Param("prorderid") String pr_order_id,
 			@Param("prcname") String pr_c_name, @Param("prbomid") String pr_bom_id, @Param("prbitem") String pr_b_item,
 			@Param("prsitem") String pr_s_item, Pageable pageable);
 
 	// 取得當筆ID
 	@Query(value = "SELECT CURRVAL('production_header_seq')", nativeQuery = true)
-	Integer getProductionHeaderSeq();
+	Long getProductionHeaderSeq();
 
 	// 查詢重複製令
 	List<ProductionHeader> findAllByProductionRecords(ProductionRecords phprid);
@@ -61,11 +61,11 @@ public interface ProductionHeaderDao extends JpaRepository<ProductionHeader, Lon
 	List<ProductionHeader> findAllByProductionRecordsAndSysstatusNotIn(ProductionRecords phprid, List<Integer> sysstatus);
 
 	// 查詢重複製令+ID
-	List<ProductionHeader> findAllByProductionRecordsAndPhwpid(ProductionRecords phprid, Integer phwpid);
+	List<ProductionHeader> findAllByProductionRecordsAndPhwpid(ProductionRecords phprid, Long phwpid);
 
 	// 查詢ID
-	List<ProductionHeader> findAllByPhid(Integer phid);
+	List<ProductionHeader> findAllByPhid(Long phid);
 
 	// delete(header)
-	Long deleteByPhidAndSysheader(Integer id, Boolean sysheader);
+	Long deleteByPhidAndSysheader(Long id, Boolean sysheader);
 }

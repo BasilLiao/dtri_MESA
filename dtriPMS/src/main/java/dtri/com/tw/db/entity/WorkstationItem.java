@@ -71,7 +71,7 @@ public class WorkstationItem {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "workstation_item_seq")
 	@SequenceGenerator(name = "workstation_item_seq", sequenceName = "workstation_item_seq", allocationSize = 1)
 	@Column(name = "wi_id")
-	private Integer wiid;
+	private Long wiid;
 
 	@Column(name = "wi_pb_cell", nullable = false, columnDefinition = "varchar(50)")
 	private String wipbcell;
@@ -154,11 +154,11 @@ public class WorkstationItem {
 		this.sysheader = sysheader;
 	}
 
-	public Integer getWiid() {
+	public Long getWiid() {
 		return wiid;
 	}
 
-	public void setWiid(Integer wiid) {
+	public void setWiid(Long wiid) {
 		this.wiid = wiid;
 	}
 

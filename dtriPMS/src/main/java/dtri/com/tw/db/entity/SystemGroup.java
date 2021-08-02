@@ -83,10 +83,10 @@ public class SystemGroup {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "system_group_seq")
 	@SequenceGenerator(name = "system_group_seq", sequenceName = "system_group_seq",allocationSize =1)
 	@Column(name = "sg_id")
-	private Integer sgid;
+	private Long sgid;
 
 	@Column(name = "sg_g_id", nullable = false, columnDefinition = "int default 0")
-	private Integer sggid;
+	private Long sggid;
 
 	@Column(name = "sg_name", nullable = false, columnDefinition = "varchar(50)")
 	private String sgname;
@@ -170,19 +170,19 @@ public class SystemGroup {
 		this.syssort = syssort;
 	}
 
-	public Integer getSgid() {
+	public Long getSgid() {
 		return sgid;
 	}
 
-	public void setSgid(Integer sgid) {
+	public void setSgid(Long sgid) {
 		this.sgid = sgid;
 	}
 
-	public Integer getSggid() {
+	public Long getSggid() {
 		return sggid;
 	}
 
-	public void setSggid(Integer sggid) {
+	public void setSggid(Long sggid) {
 		this.sggid = sggid;
 	}
 

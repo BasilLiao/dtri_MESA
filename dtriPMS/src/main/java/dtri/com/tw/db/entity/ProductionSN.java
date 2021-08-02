@@ -71,10 +71,10 @@ public class ProductionSN {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "production_sn_seq")
 	@SequenceGenerator(name = "production_sn_seq", sequenceName = "production_sn_seq", allocationSize = 1)
 	@Column(name = "ps_id")
-	private Integer psid;
+	private Long psid;
 
 	@Column(name = "ps_g_id", nullable = false)
-	private Integer psgid;
+	private Long psgid;
 	
 	@Column(name = "ps_name", nullable = false, columnDefinition = "varchar(50)")
 	private String psname;
@@ -157,19 +157,19 @@ public class ProductionSN {
 		this.sysheader = sysheader;
 	}
 
-	public Integer getPsid() {
+	public Long getPsid() {
 		return psid;
 	}
 
-	public void setPsid(Integer psid) {
+	public void setPsid(Long psid) {
 		this.psid = psid;
 	}
 
-	public Integer getPsgid() {
+	public Long getPsgid() {
 		return psgid;
 	}
 
-	public void setPsgid(Integer psgid) {
+	public void setPsgid(Long psgid) {
 		this.psgid = psgid;
 	}
 

@@ -110,16 +110,16 @@ public class WorkHoursService {
 
 			// 放入群主指定 [(key)](modify/Create/Delete) 格式
 			JSONArray obj_g_m = new JSONArray();
-			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "sys_status",""));
-			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_s_date",""));
-			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_e_date",""));
-			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_do",""));
-			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_account",""));
-			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_nb",""));
-			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_wt_id",""));
-			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_S, "col-md-1", "wh_pr_id",""));
+			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "sys_status", ""));
+			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_s_date", ""));
+			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_e_date", ""));
+			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_do", ""));
+			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_account", ""));
+			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_nb", ""));
+			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_N, "col-md-1", "wh_wt_id", ""));
+			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_S, "col-md-1", "wh_pr_id", ""));
 
-			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_S, "col-md-1", "pr_p_quantity",""));
+			obj_g_m.put(FFS.h_g(FFM.Wri.W_N, FFM.Dno.D_S, "col-md-1", "pr_p_quantity", ""));
 
 			bean.setCell_g_modify(obj_g_m);
 
@@ -166,6 +166,7 @@ public class WorkHoursService {
 
 		Date s_date = wh_s_date.equals("") ? null : Fm_Time.toDateTime(wh_s_date);
 		Date e_date = wh_e_date.equals("") ? null : Fm_Time.toDateTime(wh_e_date);
+		// workhours = hoursDao.findAll();
 		workhours = hoursDao.findAllByWorkHours(wh_pr_id/* ,wh_account */, wh_do, Integer.parseInt(wh_wt_id), Integer.parseInt(status), s_date,
 				e_date, page_r);
 		List<String> pr_id = new ArrayList<String>();
@@ -266,7 +267,7 @@ public class WorkHoursService {
 				 * return false; }
 				 */
 
-				type.setWtid(data.getInt("wh_wt_id"));
+				type.setWtid(data.getLong("wh_wt_id"));
 
 				work_p.setProductionRecords(wh_pr_id);
 				work_p.setWhwtid(type);
@@ -292,7 +293,7 @@ public class WorkHoursService {
 
 			// 檢核數量 ->是否達標最低數量->達標則更新數量
 			ArrayList<WorkType> w_all = workTypeDao.findAll();
-			Map<Integer, Integer> all_type = new HashMap<Integer, Integer>();
+			Map<Long, Integer> all_type = new HashMap<Long, Integer>();
 
 			for (WorkType workType : w_all) {
 				if (workType.getWtid() != 0) {
@@ -305,7 +306,7 @@ public class WorkHoursService {
 				}
 			}
 			int last_nb = 99999;
-			for (Map.Entry<Integer, Integer> entry : all_type.entrySet()) {
+			for (Map.Entry<Long, Integer> entry : all_type.entrySet()) {
 				if (last_nb > entry.getValue()) {
 					last_nb = entry.getValue();
 				}
@@ -360,7 +361,7 @@ public class WorkHoursService {
 				// 物件轉換
 				JSONObject data = (JSONObject) one;
 				WorkType type = new WorkType();
-				WorkHours work_p = hoursDao.findAllByWhid(data.getInt("wh_id")).get(0);
+				WorkHours work_p = hoursDao.findAllByWhid(data.getLong("wh_id")).get(0);
 				// 驗證是否有此製令
 				if (pr_id.equals("") || !data.getString("wh_pr_id").equals(pr_id)) {
 					pr_id = data.getString("wh_pr_id");
@@ -396,9 +397,9 @@ public class WorkHoursService {
 					 * return false; }
 					 */
 
-					type.setWtid(data.getInt("wh_wt_id"));
+					type.setWtid(data.getLong("wh_wt_id"));
 
-					work_p.setWhid(data.getInt("wh_id"));
+					work_p.setWhid(data.getLong("wh_id"));
 					work_p.setProductionRecords(wh_pr_id);
 					work_p.setWhwtid(type);
 					work_p.setWhdo(data.getString("wh_do"));
@@ -424,7 +425,7 @@ public class WorkHoursService {
 
 			// 檢核數量 ->是否達標最低數量->達標則更新數量
 			ArrayList<WorkType> w_all = workTypeDao.findAll();
-			Map<Integer, Integer> all_type = new HashMap<Integer, Integer>();
+			Map<Long, Integer> all_type = new HashMap<Long, Integer>();
 
 			for (WorkType workType : w_all) {
 				if (workType.getWtid() != 0) {
@@ -437,7 +438,7 @@ public class WorkHoursService {
 				}
 			}
 			int last_nb = 99999;
-			for (Map.Entry<Integer, Integer> entry : all_type.entrySet()) {
+			for (Map.Entry<Long, Integer> entry : all_type.entrySet()) {
 				if (last_nb > entry.getValue()) {
 					last_nb = entry.getValue();
 				}
@@ -476,7 +477,7 @@ public class WorkHoursService {
 					// 子類別
 					// 排除鎖定
 					if (data.getInt("sys_status") != 2) {
-						work_p.setWhid(data.getInt("wh_id"));
+						work_p.setWhid(data.getLong("wh_id"));
 						hoursDao.delete(work_p);
 					}
 				}

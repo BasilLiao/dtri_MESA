@@ -225,9 +225,9 @@ public class SystemConfigService {
 				// 物件轉換
 				SystemConfig sys_p = new SystemConfig();
 				JSONObject data = (JSONObject) one;
-				sys_p.setScid(data.getInt("sc_id"));
+				sys_p.setScid(data.getLong("sc_id"));
 				sys_p.setScname(data.getString("sc_name"));
-				sys_p.setScgid(data.getInt("sc_g_id"));
+				sys_p.setScgid(data.getLong("sc_g_id"));
 				sys_p.setScgname(data.getString("sc_g_name"));
 				sys_p.setScvalue(data.getString("sc_value"));
 				sys_p.setSysnote(data.has("sys_note") ? data.getString("sys_note") : "");
@@ -269,7 +269,7 @@ public class SystemConfigService {
 				// 物件轉換
 				SystemConfig sys_p = new SystemConfig();
 				JSONObject data = (JSONObject) one;
-				sys_p.setScid(data.getInt("sc_id"));
+				sys_p.setScid(data.getLong("sc_id"));
 
 				configDao.deleteByScidAndSysheader(sys_p.getScid(), false);
 				check = true;

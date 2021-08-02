@@ -99,7 +99,7 @@ public class SystemGroupService {
 
 			JSONArray st_val = new JSONArray();
 			permissions = permissionDao.findAllByPermission(null, null, 0, user.getSuaccount(), page_r);
-			int old_p_g_id = 0;
+			Long old_p_g_id = 0l;
 			String old_p_g_name = "";
 			for (SystemPermission s : permissions) {
 				// 排除群組代表
@@ -171,14 +171,14 @@ public class SystemGroupService {
 
 		// 全查
 		page_r = PageRequest.of(page, 999, Sort.by("sggid").descending());
-		List<Integer> sggid = new ArrayList<Integer>();
+		List<Long> sggid = new ArrayList<Long>();
 		// 是否=為系統使用者?
 		if (user.getSuid() == 1) {
 			groupDao.findAllBySysheader(true, page_r).forEach(s -> {
 				sggid.add(s.getSggid());
 			});
 		} else {
-			groupDao.findAllBySysheaderAndSgidNot(true, 1, page_r).forEach(s -> {
+			groupDao.findAllBySysheaderAndSgidNot(true, 1l, page_r).forEach(s -> {
 				sggid.add(s.getSggid());
 			});
 		}
@@ -241,7 +241,7 @@ public class SystemGroupService {
 		try {
 			JSONArray list = body.getJSONArray("create");
 			String sg_name = "";
-			Integer sg_g_id = 0;
+			Long sg_g_id = 0l;
 			for (Object one : list) {
 				// 物件轉換
 				SystemGroup sys_p = new SystemGroup();
@@ -250,7 +250,7 @@ public class SystemGroupService {
 				SystemPermission p = new SystemPermission();
 
 				// 群組判定代表
-				p.setSpid(data.getString("sg_sp_id").equals("") ? 1 : data.getInt("sg_sp_id"));
+				p.setSpid(data.getString("sg_sp_id").equals("") ? 1l : data.getLong("sg_sp_id"));
 				sys_p.setSystemPermission(p);
 				sys_p.setSgpermission((data.getBoolean("sg_permission_512") ? "1" : "0") + (data.getBoolean("sg_permission_256") ? "1" : "0")
 						+ (data.getBoolean("sg_permission_128") ? "1" : "0") + (data.getBoolean("sg_permission_64") ? "1" : "0")
@@ -265,7 +265,7 @@ public class SystemGroupService {
 				sys_p.setSysnote("");
 				// 如果是特定的子類別
 				if (data.getString("sg_g_id") != null && !data.getString("sg_g_id").equals("")) {
-					sg_g_id = data.getInt("sg_g_id");
+					sg_g_id = data.getLong("sg_g_id");
 					sg_name = data.getString("sg_name");
 				}
 
@@ -281,7 +281,7 @@ public class SystemGroupService {
 					sys_p_h.setSggid(sg_g_id);
 					sys_p_h.setSgpermission("0000000000");
 					sys_p_h.setSysheader(true);
-					sys_p_h.setSystemPermission(new SystemPermission(1));
+					sys_p_h.setSystemPermission(new SystemPermission(1l));
 					sys_p_h.setSyssort(0);
 					sys_p_h.setSysstatus(0);
 					sys_p_h.setSysmuser(user.getSuaccount());
@@ -311,7 +311,7 @@ public class SystemGroupService {
 		try {
 			JSONArray list = body.getJSONArray("save_as");
 			String sg_name = "";
-			Integer sg_g_id = 0;
+			Long sg_g_id = 0l;
 			// 如果沒資料則不做事
 			if (list.length() == 0) {
 				return true;
@@ -339,7 +339,7 @@ public class SystemGroupService {
 				JSONObject data = (JSONObject) one;
 				sys_p.setSgname(data.getString("sg_name"));
 				SystemPermission p = new SystemPermission();
-				p.setSpid(data.isNull("sg_sp_id") ? 1 : data.getInt("sg_sp_id"));
+				p.setSpid(data.isNull("sg_sp_id") ? 1l : data.getLong("sg_sp_id"));
 				sys_p.setSystemPermission(p);
 				sys_p.setSgpermission((data.getBoolean("sg_permission_512") ? "1" : "0") + (data.getBoolean("sg_permission_256") ? "1" : "0")
 						+ (data.getBoolean("sg_permission_128") ? "1" : "0") + (data.getBoolean("sg_permission_64") ? "1" : "0")
@@ -363,7 +363,7 @@ public class SystemGroupService {
 					sys_p_h.setSgname(sg_name);
 					sys_p_h.setSgpermission("0000000000");
 					sys_p_h.setSysheader(true);
-					sys_p_h.setSystemPermission(new SystemPermission(1));
+					sys_p_h.setSystemPermission(new SystemPermission(1l));
 
 					sys_p_h.setSysnote("");
 					sys_p_h.setSyssort(0);
@@ -399,11 +399,11 @@ public class SystemGroupService {
 				// 物件轉換
 				SystemGroup sys_p = new SystemGroup();
 				JSONObject data = (JSONObject) one;
-				sys_p.setSgid(data.getInt("sg_id"));
-				sys_p.setSggid(data.getInt("sg_g_id"));
+				sys_p.setSgid(data.getLong("sg_id"));
+				sys_p.setSggid(data.getLong("sg_g_id"));
 				sys_p.setSgname(data.getString("sg_name"));
 				SystemPermission p = new SystemPermission();
-				p.setSpid(data.isNull("sg_sp_id") ? 1 : data.getInt("sg_sp_id"));
+				p.setSpid(data.isNull("sg_sp_id") ? 1l : data.getLong("sg_sp_id"));
 				sys_p.setSystemPermission(p);
 				sys_p.setSgpermission((data.getBoolean("sg_permission_512") ? "1" : "0") + (data.getBoolean("sg_permission_256") ? "1" : "0")
 						+ (data.getBoolean("sg_permission_128") ? "1" : "0") + (data.getBoolean("sg_permission_64") ? "1" : "0")
@@ -432,7 +432,7 @@ public class SystemGroupService {
 						// 父類別(限定修改) 還原
 						sys_p.setSgpermission("0000000000");
 						sys_p.setSysheader(true);
-						sys_p.setSystemPermission(new SystemPermission(1));
+						sys_p.setSystemPermission(new SystemPermission(1l));
 						sys_p.setSyssort(0);
 						sys_p.setSysmuser(user.getSuaccount());
 						groupDao.save(sys_p);
@@ -468,13 +468,13 @@ public class SystemGroupService {
 				SystemGroup sys_p = new SystemGroup();
 
 				JSONObject data = (JSONObject) one;
-				sys_p.setSgid(data.getInt("sg_id"));
+				sys_p.setSgid(data.getLong("sg_id"));
 
 				// 不得刪除自己
 				if (data.getInt("sg_id") != user.getSusggid()) {
 					if (data.getInt("sg_sp_id") == 0) {
 						// 父類別 關聯全清除
-						groupDao.deleteBySggid(data.getInt("sg_g_id"));
+						groupDao.deleteBySggid(data.getLong("sg_g_id"));
 					}
 				} else {
 					return false;

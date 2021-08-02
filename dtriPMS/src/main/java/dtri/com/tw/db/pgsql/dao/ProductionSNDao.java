@@ -15,7 +15,7 @@ public interface ProductionSNDao extends JpaRepository<ProductionSN, Long> {
 	ArrayList<ProductionSN> findAll();
 
 	// 查詢全部
-	ArrayList<ProductionSN> findAllByPsid(Integer id);
+	ArrayList<ProductionSN> findAllByPsid(Long id);
 
 	// 查詢一部分
 	@Query("SELECT c FROM ProductionSN c " //
@@ -30,16 +30,16 @@ public interface ProductionSNDao extends JpaRepository<ProductionSN, Long> {
 	ArrayList<ProductionSN> findAllBySysheaderOrderByPsgidAsc(boolean sysheader);
 
 	// 查詢是否重複 群組
-	ArrayList<ProductionSN> findAllBySysheaderAndPsgid(boolean sysheader, Integer psgid);
+	ArrayList<ProductionSN> findAllBySysheaderAndPsgid(boolean sysheader, Long psgid);
 
 	// 取得最新G_ID
 	@Query(value = "SELECT CURRVAL('production_g_sn_seq')", nativeQuery = true)
-	Integer getProduction_g_sn_seq();
+	Long getProduction_g_sn_seq();
 
 	// 取得ID
 	@Query(value = "SELECT NEXTVAL('production_sn_seq')", nativeQuery = true)
-	Integer getProduction_sn_seq();
+	Long getProduction_sn_seq();
 
 	// delete
-	Long deleteByPsidAndSysheader(Integer id, Boolean sysheader);
+	Long deleteByPsidAndSysheader(Long id, Boolean sysheader);
 }

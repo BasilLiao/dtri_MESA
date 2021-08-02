@@ -20,7 +20,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  * @see 產品製程-主體<br>
  *      pb_id : ID 0:主產品材料(項目SN) 1:之後為_值內容<br>
  *      pb_ph_id : 群組對應製令ID<br>
- *      pb_sn :SN(出貨序號)<br>
+ *      pb_sn :SN(產品序號)<br>
+ *      pb_b_sn:燒錄序號<br>
  *      pb_f_value : SN(需維修項目) (JSON 包裝)<br>
  *      pb_f_note : 損壞說明<br>
  *      pb_w_name : 工作站完成人<br>
@@ -88,16 +89,19 @@ public class ProductionBody implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "production_body_seq")
 	@SequenceGenerator(name = "production_body_seq", sequenceName = "production_body_seq", allocationSize = 1)
 	@Column(name = "pb_id")
-	private Integer pbid;
+	private Long pbid;
 
 	@Column(name = "pb_g_id")
-	private Integer pbgid;
+	private Long pbgid;
 
 	@Column(name = "pb_sn", nullable = false, columnDefinition = "varchar(50)")
 	private String pbsn;
 
 	@Column(name = "pb_old_sn", columnDefinition = "varchar(50)")
 	private String pboldsn;
+
+	@Column(name = "pb_b_sn", nullable = false, columnDefinition = "varchar(50)")
+	private String pbbsn;
 
 	@Column(name = "pb_useful_sn", nullable = false, columnDefinition = "integer DEFAULT 0")
 	private Integer pbusefulsn;
@@ -341,7 +345,7 @@ public class ProductionBody implements Serializable {
 
 		private static final long serialVersionUID = 1L;
 		private Integer sysver;
-		private Integer pbid;
+		private Long pbid;
 
 		public Integer getSysver() {
 			return sysver;
@@ -351,11 +355,11 @@ public class ProductionBody implements Serializable {
 			this.sysver = sysver;
 		}
 
-		public Integer getPbid() {
+		public Long getPbid() {
 			return pbid;
 		}
 
-		public void setPbid(Integer pbid) {
+		public void setPbid(Long pbid) {
 			this.pbid = pbid;
 		}
 	}
@@ -400,11 +404,11 @@ public class ProductionBody implements Serializable {
 		this.pbrecyclingdate = pbrecyclingdate;
 	}
 
-	public Integer getPbgid() {
+	public Long getPbgid() {
 		return pbgid;
 	}
 
-	public void setPbgid(Integer pbgid) {
+	public void setPbgid(Long pbgid) {
 		this.pbgid = pbgid;
 	}
 
@@ -496,11 +500,11 @@ public class ProductionBody implements Serializable {
 		this.sysheader = sysheader;
 	}
 
-	public Integer getPbid() {
+	public Long getPbid() {
 		return pbid;
 	}
 
-	public void setPbid(Integer pbid) {
+	public void setPbid(Long pbid) {
 		this.pbid = pbid;
 	}
 
@@ -510,6 +514,14 @@ public class ProductionBody implements Serializable {
 
 	public void setPbsn(String pbsn) {
 		this.pbsn = pbsn;
+	}
+
+	public String getPbbsn() {
+		return pbbsn;
+	}
+
+	public void setPbbsn(String pbbsn) {
+		this.pbbsn = pbbsn;
 	}
 
 	public String getPbfvalue() {

@@ -27,12 +27,12 @@ public interface SystemConfigDao extends JpaRepository<SystemConfig, Long> {
 
 	// 取得G_ID
 	@Query(value = "SELECT NEXTVAL('system_config_g_seq')", nativeQuery = true)
-	Integer getSystem_config_g_seq();
+	Long getSystem_config_g_seq();
 
 	// 取得ID
 	@Query(value = "SELECT CURRVAL('system_config_seq')", nativeQuery = true)
-	Integer getSystem_config_seq();
+	Long getSystem_config_seq();
 
 	// delete
-	Long deleteByScidAndSysheader(Integer id, Boolean sysheader);
+	Long deleteByScidAndSysheader(Long id, Boolean sysheader);
 }

@@ -77,7 +77,7 @@ public class WorkHours {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "work_hours_seq")
 	@SequenceGenerator(name = "work_hours_seq", sequenceName = "work_hours_seq", allocationSize = 1)
 	@Column(name = "wh_id")
-	private Integer whid;
+	private Long whid;
 
 	@ManyToOne(targetEntity = ProductionRecords.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "wh_pr_id")
@@ -175,11 +175,11 @@ public class WorkHours {
 		this.sysheader = sysheader;
 	}
 
-	public Integer getWhid() {
+	public Long getWhid() {
 		return whid;
 	}
 
-	public void setWhid(Integer whid) {
+	public void setWhid(Long whid) {
 		this.whid = whid;
 	}
 

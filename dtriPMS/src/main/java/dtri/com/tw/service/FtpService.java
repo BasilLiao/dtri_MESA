@@ -222,11 +222,15 @@ public class FtpService {
 					if (f_n[0].indexOf("OQC") != -1) {
 						one.put("check", false);
 					} else {
-						one.put("ph_pr_id", one.getString("WorkOrder"));
-						String mbSn[] = (one.getString("UUID").split("-"));
-						one.put("MB(UUID)", mbSn[mbSn.length - 1]);
+						one.put("ph_pr_id", one.has("WorkOrder") ? one.getString("WorkOrder") : "");
+						if (one.has("UUID")) {
+							String mbSn[] = (one.getString("UUID").split("-"));
+							one.put("MB(UUID)", mbSn[mbSn.length - 1]);
+						} else {
+							one.put("MB(UUID)", " ");
+						}
 						one.put("ph_model", "");
-						one.put("pb_sn", one.getString("SN"));
+						one.put("pb_sn", one.has("SN") ? one.getString("SN") : " ");
 						one.put("pb_l_size", file_size);
 						one.put("pb_l_text", everything.toString());
 						one.put("pb_l_path", new_path);

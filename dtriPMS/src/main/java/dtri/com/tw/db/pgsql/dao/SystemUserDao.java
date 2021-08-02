@@ -17,7 +17,7 @@ public interface SystemUserDao extends JpaRepository<SystemUser, Long> {
 	ArrayList<SystemUser> findAll();
 
 	// 查詢ID
-	ArrayList<SystemUser> findAllBySuid(Integer id);
+	ArrayList<SystemUser> findAllBySuid(Long id);
 
 	// 查詢全部含-頁數
 	@Query("SELECT c FROM SystemUser c "//
@@ -37,8 +37,8 @@ public interface SystemUserDao extends JpaRepository<SystemUser, Long> {
 	
 	// @Query註解裡面寫JPQL語句,定義查詢
 	@Query(nativeQuery = false, value = " SELECT i FROM SystemUser i WHERE su_id = ?1")
-	SystemUser readId(Integer id);
+	SystemUser readId(Long id);
 
-	Long deleteBySuid(Integer suid);
+	Long deleteBySuid(Long suid);
 
 }
