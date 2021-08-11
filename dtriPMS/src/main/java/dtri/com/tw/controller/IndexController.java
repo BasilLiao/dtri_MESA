@@ -74,9 +74,8 @@ public class IndexController {
 	@RequestMapping(value = { "/index.basil" }, method = { RequestMethod.POST })
 	public ModelAndView indexCheck() {
 		System.out.println("---controller -index(init) " + SYS_F + " Check");
-		PackageBean req_object = new PackageBean();
-		PackageBean resp_object = new PackageBean();
-		String info = null, info_color = null;
+		PackageBean req = new PackageBean();
+		PackageBean resp = new PackageBean();
 		List<SystemGroup> systemGroup = new ArrayList<SystemGroup>();
 		// 取得-當前用戶資料
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -85,14 +84,14 @@ public class IndexController {
 			// Step1.查詢資料
 			SystemUser user = userDetails.getSystemUser();
 			List<SystemGroup> nav = userDetails.getSystemGroup();
-			resp_object = indexService.getNav(nav);
-			resp_object.setInfo_user(indexService.getUserInfo(user));
+			resp = indexService.getNav(nav);
+			resp.setInfo_user(indexService.getUserInfo(user));
 			// Step1.查詢資料權限
 			systemGroup = userDetails.getSystemGroup();
 		} else {
 			// 取得用戶失敗
-			info = PackageBean.info_message_warning + PackageBean.info_administrator;
-			info_color = PackageBean.info_color_warning;
+			resp.setInfo(PackageBean.info_message_warning1_NotFindUser);
+			resp.setInfo_color(PackageBean.info_color_warning);
 		}
 		// UI限制功能
 		SystemPermission one = new SystemPermission();
@@ -102,10 +101,10 @@ public class IndexController {
 			}
 		});
 		// Step2.包裝回傳
-		resp_object = packageService.setObjResp(resp_object, req_object, info, info_color, "");
+		resp = packageService.setObjResp(resp, req, "");
 
 		// 回傳-模板
-		return new ModelAndView("./html/main.html", "initMain", packageService.objToJson(resp_object));
+		return new ModelAndView("./html/main.html", "initMain", packageService.objToJson(resp));
 	}
 
 	/**
@@ -115,11 +114,10 @@ public class IndexController {
 	@RequestMapping(value = { "ajax/index.basil" }, method = { RequestMethod.POST })
 	public String index(@RequestBody String json_object) {
 		System.out.println("---controller -index(again) " + SYS_F + " Check");
-		PackageBean req_object = new PackageBean();
-		PackageBean resp_object = new PackageBean();
+		PackageBean req = new PackageBean();
+		PackageBean resp = new PackageBean();
 		// Step1.包裝解析
-		req_object = packageService.jsonToObj(new JSONObject(json_object));
-		String info = null, info_color = null;
+		req = packageService.jsonToObj(new JSONObject(json_object));
 		// 取得-當前用戶資料
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
@@ -127,17 +125,17 @@ public class IndexController {
 			// Step2.查詢資料
 			SystemUser user = userDetails.getSystemUser();
 			List<SystemGroup> nav = userDetails.getSystemGroup();
-			resp_object = indexService.getNav(nav);
-			resp_object.setInfo_user(indexService.getUserInfo(user));
+			resp = indexService.getNav(nav);
+			resp.setInfo_user(indexService.getUserInfo(user));
 		} else {
 			// 取得用戶失敗
-			info = PackageBean.info_message_warning + PackageBean.info_administrator;
-			info_color = PackageBean.info_color_warning;
+			resp.setInfo(PackageBean.info_message_warning1_NotFindUser);
+			resp.setInfo_color(PackageBean.info_color_warning);
 		}
 		// Step2.包裝回傳
-		resp_object = packageService.setObjResp(resp_object, req_object, info, info_color, "");
+		resp = packageService.setObjResp(resp, req, "");
 
 		// 回傳-模板
-		return packageService.objToJson(resp_object);
+		return packageService.objToJson(resp);
 	}
 }

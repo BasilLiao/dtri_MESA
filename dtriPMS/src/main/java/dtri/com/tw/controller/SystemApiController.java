@@ -43,7 +43,6 @@ public class SystemApiController {
 		case "get_work_program":
 			obj_re = apiService.getWorkstationProgramList().toString();
 			break;
-			
 
 		default:
 			break;

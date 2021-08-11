@@ -82,13 +82,13 @@ public class PackageService {
 	 * @param info        訊息
 	 * @param info_color  顏色
 	 **/
-	public PackageBean setObjResp(PackageBean resp_object, PackageBean req_object, String info, String info_color,String html_permission) {
+	public PackageBean setObjResp(PackageBean resp_object, PackageBean req_object, /*String info, String info_color,*/String html_permission) {
 		resp_object.setAction(req_object.getaction() == null ? "AR" : req_object.getaction());
 		resp_object.setCall_bk_fn(req_object.getCall_bk_fn() == null ? "" : req_object.getCall_bk_fn());
 		resp_object.setCall_bk_vals(
 				req_object.getCall_bk_vals() == null ? new JSONObject() : req_object.getCall_bk_vals());
-		resp_object.setInfo(info == null ? PackageBean.info_message_success : info);
-		resp_object.setInfo_color(info_color == null ? PackageBean.info_color_success : info_color);// --danger--warning--success
+		//resp_object.setInfo(info == null ? PackageBean.info_message_success : info);
+		//resp_object.setInfo_color(info_color == null ? PackageBean.info_color_success : info_color);// --danger--warning--success
 		resp_object.setPage_batch(req_object.getPage_batch() == null ? 1 : req_object.getPage_batch());
 		resp_object.setPage_now_nb(req_object.getPage_now_nb() == null ? 1 : req_object.getPage_now_nb());
 		resp_object.setPage_total(req_object.getPage_total() == null ? 100 : req_object.getPage_total());

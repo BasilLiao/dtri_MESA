@@ -16,6 +16,8 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import dtri.com.tw.bean.FtpUtilBean;
@@ -33,6 +35,8 @@ public class FtpService {
 	 * @param ftpPort     FTP埠 預設為21
 	 * @return
 	 */
+	Logger logger = LoggerFactory.getLogger(FTPClient.class);
+
 	private static FTPClient getFTPClient(String ftpHost, String ftpUserName, String ftpPassword, int ftpPort) {
 		FTPClient ftpClient = new FTPClient();
 		try {
@@ -182,10 +186,21 @@ public class FtpService {
 				if ((searchName[0].equals("") || f_n[0].indexOf(searchName[0]) != -1)
 						&& (searchName[1].equals("") || f_n[1].indexOf(searchName[1]) != -1)
 						&& (searchName[2].equals("") || f_n[2].indexOf(searchName[2]) != -1)) {
+					// 建立輩分資料夾
+					makeDirectories(ftpClient, ftp.getRemotePathBackup() + searchName[0]);
+					// 製令單 如果有OQC 排除
+					if (ff.getName().indexOf("OQC") != -1) {
+						String file_name_OQC = ff.getName();
+						String dirPath = ftp.getRemotePathBackup() + searchName[0];
+						String re_path = ftp.getRemotePath() + "/" + file_name_OQC;
+						String new_path = dirPath + "/" + file_name_OQC + "_" + work_use + "_" + Fm_Time.to_yMd_Hms(new Date());
+						ftpClient.rename(re_path, new_path);
+						continue;
+					}
+
 					is.reset();
 					ftpClient.retrieveFile(ff.getName(), is);
 					BufferedReader bufferedReader = new BufferedReader(new StringReader(is.toString("UTF-8")));
-
 					// 第一行抓取+檢驗 (檔頭BOM)去除 是否為正確
 					line = bufferedReader.readLine();
 					line_all = bufferedReader.readLine();
@@ -206,36 +221,42 @@ public class FtpService {
 						one = new JSONObject();
 						one.put("check", false);
 						list.put(one);
+						// 轉移檔案
+						one = new JSONObject(line);
+						String dirPath = ftp.getRemotePathBackup() + searchName[0];
+						String re_path = ftp.getRemotePath() + "/" + ff.getName();
+						String new_path = dirPath + "/" + ff.getName() + "_" + work_use + "_" + Fm_Time.to_yMd_Hms(new Date());
+						if (ftpClient.rename(re_path, new_path)) {
+							logger.error("to Backup OK!!");
+						}
 						continue;
 					}
 					// 轉移檔案
 					one = new JSONObject(line);
-					String dirPath = ftp.getRemotePathBackup() + one.getString("WorkOrder");
+					String dirPath = ftp.getRemotePathBackup() + searchName[0];
 					String re_path = ftp.getRemotePath() + "/" + ff.getName();
-					String new_path = dirPath + "/" + ff.getName() + "_" + work_use + "_ " + Fm_Time.to_yMd_Hms(new Date());
-					ftpClient.rename(re_path, new_path);
+					String new_path = dirPath + "/" + ff.getName() + "_" + work_use + "_" + Fm_Time.to_yMd_Hms(new Date());
+					if (ftpClient.rename(re_path, new_path)) {
+						logger.error("to Backup OK!!");
+					}
 
 					// 補型號/補主機板號/轉16進制
 					long file_size = ff.getSize();
 
-					// 製令單 排除OQC
-					if (f_n[0].indexOf("OQC") != -1) {
-						one.put("check", false);
+					one.put("ph_pr_id", one.has("WorkOrder") ? one.getString("WorkOrder") : "");
+					if (one.has("UUID")) {
+						String mbSn[] = (one.getString("UUID").split("-"));
+						one.put("MB(UUID)", mbSn[mbSn.length - 1]);
 					} else {
-						one.put("ph_pr_id", one.has("WorkOrder") ? one.getString("WorkOrder") : "");
-						if (one.has("UUID")) {
-							String mbSn[] = (one.getString("UUID").split("-"));
-							one.put("MB(UUID)", mbSn[mbSn.length - 1]);
-						} else {
-							one.put("MB(UUID)", " ");
-						}
-						one.put("ph_model", "");
-						one.put("pb_sn", one.has("SN") ? one.getString("SN") : " ");
-						one.put("pb_l_size", file_size);
-						one.put("pb_l_text", everything.toString());
-						one.put("pb_l_path", new_path);
-						one.put("check", true);
+						one.put("MB(UUID)", " ");
 					}
+					one.put("ph_model", "");
+					one.put("pb_sn", one.has("SN") ? one.getString("SN") : " ");
+					one.put("pb_l_size", file_size);
+					one.put("pb_l_text", everything.toString());
+					one.put("pb_l_path", new_path);
+					one.put("check", true);
+
 					list.put(one);
 
 					// 關閉串流
@@ -271,25 +292,8 @@ public class FtpService {
 	 * @throws IOException if any error occurred during client-server communication
 	 */
 	public static boolean makeDirectories(FTPClient ftpClient, String dirPath) throws IOException {
-		String[] pathElements = dirPath.split("/");
-		if (pathElements != null && pathElements.length > 0) {
-			for (String singleDir : pathElements) {
-				if (singleDir.equals("")) {
-					continue;
-				}
-				boolean existed = ftpClient.changeWorkingDirectory(singleDir);
-				if (!existed) {
-					boolean created = ftpClient.makeDirectory(singleDir);
-					if (created) {
-						System.out.println("CREATED directory: " + singleDir);
-						ftpClient.changeWorkingDirectory(singleDir);
-					} else {
-						System.out.println("COULD NOT  create directory: " + singleDir);
-						return false;
-					}
-				}
-			}
-		}
-		return true;
+		boolean created = ftpClient.makeDirectory(dirPath);
+
+		return created;
 	}
 }

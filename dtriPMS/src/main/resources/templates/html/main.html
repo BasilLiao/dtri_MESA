@@ -129,8 +129,8 @@ body {
 						//Step1.顯示 訊息
 						if(event['resp_content']!=""){
 							t_alert.alertshow(event['resp_content']['info_color'],event['resp_content']['info']);
-							if(event['resp_content']['info_color']!="success")
-							return null;
+							//if(event['resp_content']['info_color']!="success")
+							//return null;
 						}else{
 							t_alert.alertshow("danger", "[007] The command was executed [ERROR]!!");
 							return null;

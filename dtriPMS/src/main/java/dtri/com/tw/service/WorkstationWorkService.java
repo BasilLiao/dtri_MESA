@@ -185,8 +185,14 @@ public class WorkstationWorkService {
 			ftp.setLocalPath(localPath);
 			JSONArray list_log = ftpService.getLogPLT(ftp, user.getSuaccount(), searchName);
 
-			pb_all = pbDao.findAllByPbsn(pb_sn);
-
+			pb_all = pbDao.findAllByPbbsn(pb_sn);
+			// 檢查資料是否存在
+			if(pb_all.size()!=1) {
+				bean.setBody(new JSONObject());
+				bean.autoMsssage(102);
+				return bean;
+			}
+			
 			// Log 更新 資料(檢查是否有LOG+內容是否正確)
 			if (list_log != null && list_log.length() > 0 && list_log.getJSONObject(0).getBoolean("check")) {
 				JSONObject one = list_log.getJSONObject(0);

@@ -115,7 +115,6 @@ public class MaintainCodeService {
 			status = status.equals("") ? "0" : status;
 		}
 		maintainCodes = mcDao.findAllByMaintainCode(mc_value, mc_g_name, Integer.parseInt(status), page_r);
-
 		// 放入包裝(body) [01 是排序][_b__ 是分割直][資料庫欄位名稱]
 		JSONArray object_bodys = new JSONArray();
 		maintainCodes.forEach(one -> {
@@ -141,6 +140,11 @@ public class MaintainCodeService {
 		bean.setBody(new JSONObject().put("search", object_bodys));
 		// 是否為群組模式? type:[group/general] || 新增時群組? createOnly:[all/general]
 		bean.setBody_type(new JSONObject("{'type':'group','createOnly':'all'}"));
+		// 沒查到東西
+		if (maintainCodes.size() == 0) {
+			bean.autoMsssage(102);
+			return bean;
+		}
 		return bean;
 	}
 

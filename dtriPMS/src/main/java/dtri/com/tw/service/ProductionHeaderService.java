@@ -578,12 +578,13 @@ public class ProductionHeaderService {
 						pro_sn_one.setPsgid(6l);
 						pro_sn_one.setPsname("[000]");
 						pro_sn.add(pro_sn_one);
+						System.out.println("");
 						JSONObject sn_list = Fm_SN.analyze_Sn(pro_sn, true, data.getInt("pr_p_quantity"));
 
 						// 檢核_區間是否用過
 						String sn_f = sn_list.getJSONArray("sn_list").get(0).toString();
 						String sn_e = sn_list.getJSONArray("sn_list").get(sn_list.getJSONArray("sn_list").length() - 1).toString();
-						if (productionBodyDao.findAllByPbsn(sn_f).size() > 0 || productionBodyDao.findAllByPbsn(sn_e).size() > 0) {
+						if (productionBodyDao.findAllByPbbsn(sn_f).size() > 0 || productionBodyDao.findAllByPbbsn(sn_e).size() > 0) {
 							return false;
 						}
 
@@ -684,7 +685,7 @@ public class ProductionHeaderService {
 					pro_h.setPhpname(data.getString("ph_p_name"));
 					pro_h.setPhschedule(0 + "／" + data.getInt("pr_p_quantity"));
 					pro_h.setSysheader(true);
-					pro_h.setSysnote(data.getString("sys_note"));
+					pro_h.setSysnote(data.has("sys_note")?data.getString("sys_note"):"");
 					pro_h.setSyssort(data.getInt("sys_sort"));
 					pro_h.setSysver(0);
 					pro_h.setSysstatus(data.getInt("sys_status"));

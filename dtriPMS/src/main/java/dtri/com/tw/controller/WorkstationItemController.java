@@ -21,7 +21,7 @@ public class WorkstationItemController {
 //		System.out.println("---controller -access " + SYS_F + " Check");
 //		PackageBean req = new PackageBean();
 //		PackageBean resp = new PackageBean();
-//		String info = null, info_color = null;
+//		 
 //		System.out.println(json_object);
 //		// 取得-當前用戶資料
 //		List<SystemGroup> systemGroup = new ArrayList<SystemGroup>();
@@ -57,14 +57,14 @@ public class WorkstationItemController {
 //		System.out.println("---controller -search " + SYS_F + " Check");
 //		PackageBean req = new PackageBean();
 //		PackageBean resp = new PackageBean();
-//		String info = null, info_color = null;
+//		 
 //		System.out.println(json_object);
 //		// Step1.包裝解析
 //		req = packageService.jsonToObj(new JSONObject(json_object));
 //		// Step2.進行查詢
 //		resp = itemService.getData(req.getBody(), req.getPage_batch(), req.getPage_total());
 //		// Step3.包裝回傳
-//		resp = packageService.setObjResp(resp, req, info, info_color, "");
+//		resp = packageService.setObjResp(resp, req, "");
 //		// 回傳-資料
 //		return packageService.objToJson(resp);
 //	}
@@ -79,7 +79,7 @@ public class WorkstationItemController {
 //		PackageBean req = new PackageBean();
 //		PackageBean resp = new PackageBean();
 //		boolean check = false;
-//		String info = null, info_color = null;
+//		 
 //		System.out.println(json_object);
 //		// 取得-當前用戶資料
 //		SystemUser user = new SystemUser();
@@ -99,7 +99,7 @@ public class WorkstationItemController {
 //		// Step3.進行判定
 //		if (check) {
 //			// Step4.包裝回傳
-//			resp = packageService.setObjResp(resp, req, info, info_color, "");
+//			resp = packageService.setObjResp(resp, req, "");
 //		} else {
 //			// Step4.包裝回傳
 //			resp = packageService.setObjResp(resp, req, PackageBean.info_message_warning, PackageBean.info_color_warning, "");
@@ -118,7 +118,7 @@ public class WorkstationItemController {
 //		PackageBean req = new PackageBean();
 //		PackageBean resp = new PackageBean();
 //		boolean check = false;
-//		String info = null, info_color = null;
+//		 
 //		System.out.println(json_object);
 //		// 取得-當前用戶資料
 //		SystemUser user = new SystemUser();
@@ -135,7 +135,7 @@ public class WorkstationItemController {
 //		// Step3.進行判定
 //		if (check) {
 //			// Step4.包裝回傳
-//			resp = packageService.setObjResp(resp, req, info, info_color, "");
+//			resp = packageService.setObjResp(resp, req, "");
 //		} else {
 //			// Step4.包裝回傳
 //			resp = packageService.setObjResp(resp, req, PackageBean.info_message_warning, PackageBean.info_color_warning, "");
@@ -154,7 +154,7 @@ public class WorkstationItemController {
 //		PackageBean req = new PackageBean();
 //		PackageBean resp = new PackageBean();
 //		boolean check = false;
-//		String info = null, info_color = null;
+//		 
 //		System.out.println(json_object);
 //
 //		// Step1.包裝解析
@@ -164,7 +164,7 @@ public class WorkstationItemController {
 //		// Step3.進行判定
 //		if (check) {
 //			// Step4.包裝回傳
-//			resp = packageService.setObjResp(resp, req, info, info_color, "");
+//			resp = packageService.setObjResp(resp, req, "");
 //		} else {
 //			// Step4.包裝回傳
 //			resp = packageService.setObjResp(resp, req, PackageBean.info_message_warning, PackageBean.info_color_warning, "");

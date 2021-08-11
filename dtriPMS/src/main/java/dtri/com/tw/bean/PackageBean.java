@@ -16,8 +16,13 @@ public class PackageBean {
 	public static final String info_color_warning = "warning";
 	public static final String info_color_danger = "danger";
 	public static final String info_message_success = "[000] The command was executed [Successfully]!!";
-	public static final String info_message_warning = "[001] The command was executed [Warning]!!";
-	public static final String info_message_danger = "[002] The command was executed [ERROR]!!";
+	public static final String info_message_warning = "[100] The command was executed [Warning]!!";
+	public static final String info_message_warning1_NotFindUser = "[101] Unable to get user information [Warning]!!";
+	public static final String info_message_warning2_NotFind = "[102] Did not find any results [Warning]!!";
+	public static final String info_message_warning3 = "[103] The command was executed [Warning]!!";
+	public static final String info_message_warning4 = "[104] The command was executed [Warning]!!";
+
+	public static final String info_message_danger = "[502] The command was executed [ERROR]!!";
 	public static final String info_administrator = " Please contact the system administrator #321";
 
 	// "resp_content" or "req_content"
@@ -40,14 +45,44 @@ public class PackageBean {
 	private JSONArray cell_searchs;// 查詢欄位
 	private JSONArray cell_modify;// 修改欄位
 	private JSONArray cell_refresh;// 修改欄位更新
-	
+
 	private JSONArray cell_g_modify;// 修改群組欄位
 
 	public PackageBean() {
-		this.info = info_message_danger + info_administrator;
-		this.info_color = info_color_danger;
+		this.info = info_message_success;
+		this.info_color = info_color_success;
 		this.body_type = new JSONObject("{'type':'general','createOnly':'all'}");//
 		this.date = new Date();
+	}
+
+	/**
+	 * @param type 100 : 一般錯誤<br>
+	 *             101 : 沒使用者資訊<br>
+	 *             102 : 沒找到東西<br>
+	 * 
+	 **/
+	public void autoMsssage(int type) {
+		switch (type) {
+		case 100:
+			// 一般指令錯誤
+			this.info = info_message_warning;
+			this.info_color = info_color_warning;
+		case 101:
+			// 沒使用者資訊
+			this.info = info_message_warning1_NotFindUser;
+			this.info_color = info_color_warning;
+		case 102:
+			// 沒找到東西
+			this.info = info_message_warning2_NotFind;
+			this.info_color = info_color_warning;
+			break;
+		default:
+			// 不明錯誤
+			this.info = info_message_danger + info_administrator;
+			this.info_color = info_color_danger;
+			break;
+		}
+
 	}
 
 	public String getType_content() {
@@ -209,5 +244,5 @@ public class PackageBean {
 	public void setCell_refresh(JSONArray cell_refresh) {
 		this.cell_refresh = cell_refresh;
 	}
-	
+
 }
